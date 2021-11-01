@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Navbar from '../Navbar/Navbar'
 import Image from '../Imagecompo/Image'
 import './Forgot.css'
+import { useHistory } from 'react-router-dom'
 
 function Forgot() {
     const [user, setUser] = useState({ email: "", newpassword: "" })
@@ -10,6 +11,19 @@ function Forgot() {
         name = e.target.name;
         value = e.target.value;
         setUser({ ...user, [name]: value });
+    }
+    const [allEntry, setallEntery] = useState([]);
+    const history = useHistory();
+    const submitForm = async (event) => {
+
+        event.preventDefault();
+        const newEntry = { ...user }
+        setallEntery([...allEntry, newEntry]);
+        setUser({ ...user, email: "", newpassword: "" });
+        setTimeout(() => {
+            history.push("/OTP");
+        }, 1000)
+
     }
     return (
 
@@ -23,7 +37,7 @@ function Forgot() {
 
                     </div>
                     <div className="col-lg-2">
-                        <form>
+                        <form method='POST' onSubmit={submitForm}>
 
                             <div className="form-row">
 
@@ -42,14 +56,16 @@ function Forgot() {
 
                             </div>
 
-                        </form>
-                        <div className="form-row">
+                            <div className="form-row">
 
                             <div className="col-lg-2">
-                                <button type="button" className="btn4"><span className="confirm">Confirm</span></button>
+                                <button type="submit" className="btn4"><span className="confirm">Confirm</span></button>
                             </div>
 
                         </div>
+
+                        </form>
+                        
                     </div>
                 </div>
             </div>

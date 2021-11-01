@@ -13,6 +13,14 @@ function Sign(){
         value=e.target.value;
         setUser({...user,[name]:value});
     }
+    const [allEntry, setallEntery] = useState([]);
+    const submitForm = async (event) => {
+
+        event.preventDefault();
+        const newEntry = {...user}
+        setallEntery([...allEntry, newEntry]);
+        setUser({ ...user, Name: "", email: "", password: "" });
+    }
     return(
         
         <div className="box">
@@ -26,7 +34,7 @@ function Sign(){
                  </div>
                      <div className="col-lg-2">
                             
-                         <form>
+                         <form method="POST" onSubmit={submitForm}>
 
                          <div className="form-row">
 
@@ -67,7 +75,7 @@ function Sign(){
                              <div className="form-row">
 
                                 <div className="col-lg-2">
-                                    <button type="button" className="btn1"><span className="sign">Sign</span><span className="sign">In</span></button>
+                                    <button type="submit" className="btn1"><span className="sign">Sign</span><span className="sign">In</span></button>
                                 </div>
 
                              </div>
