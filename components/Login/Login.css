@@ -1,0 +1,19 @@
+.heading1{
+    margin-left: -6%;
+    margin-top: 6%;
+    padding: 0% 5% 2% 5%;
+}
+.btn1{
+    background-color: #1995AF;
+    padding: 10px 400%;
+    border-radius: 4px;
+    border-style: none;
+}
+.forgot{
+
+    font-size: 12px;
+    margin-left: 22px;
+}
+#checkbox{
+    border-radius: 50%;
+}

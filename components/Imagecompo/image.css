@@ -1,0 +1,11 @@
+.image-box{
+    height: fit-content;
+    width: fit-content;
+    margin-left: 50%;
+    margin-top: 6%;
+}
+.image{
+    position: absolute;
+    height: 60%;
+    width: 40%;
+}

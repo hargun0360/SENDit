@@ -1,0 +1,60 @@
+.box{
+    position: absolute;
+    box-sizing: border-box;
+    background-color: #E5E5E5;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.container{
+    margin-left: 18%;
+}
+
+.form-row{
+    margin-top: 8%;
+}
+
+.input1{
+
+    border-radius: 4px;
+    background-color: white;
+    border-style: none;
+    text-align: center;
+    padding: 10px;
+}
+
+
+.sign{
+    float: inline-start;
+    color: black;
+    font-weight: 500;
+}
+.lab{
+   
+    margin-left: 2%;
+    font-size: 15px;
+}
+
+
+
+.buttontext{
+    color: white;
+}
+
+
+i{
+    position: absolute;
+    padding: 1%;
+    
+}
+.question{
+
+    margin-top: 25%;
+    margin-left: 18%;
+}
+.qt{
+    width: 150%;
+    font-size: 12px;
+}
+
