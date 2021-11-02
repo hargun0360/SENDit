@@ -55,7 +55,7 @@ function Login() {
         }else if(!regexPass.test(values.password)){
             error.password="**This is not a valid password!";
         }
-        if(values.password.length < 8){
+        else if(values.password.length < 8){
             error.password="**Password must be more than 8 characters!";
         }else if(values.password.length > 12){
             error.password="**Password must be less than 12 characters!";

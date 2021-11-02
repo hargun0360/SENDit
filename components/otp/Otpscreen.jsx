@@ -13,6 +13,17 @@ function Otp(){
         value=e.target.value;
         setUser({...user,[name]:value});
     }
+    const [allEntry, setallEntery] = useState([]);
+
+    const submitForm = async (event) => {
+        event.preventDefault();
+        const newEntry = { ...user }
+        console.log(newEntry);
+        setallEntery([...allEntry, newEntry]);
+        setUser({ ...user, otp:"" });
+        window.alert("Submission Successfull");
+}
+    
     return(
 
         <div className="box">
@@ -24,7 +35,7 @@ function Otp(){
             <div className="row">
                  <div className = "col-lg-12"></div>
 
-        <form>
+        <form  method="POST" onSubmit={submitForm}>
                 <div className="form-row" id="oo">
 
                     <div className="col-lg-2-1">
@@ -36,7 +47,7 @@ function Otp(){
                 <div className="form-row" id="gg">
 
                                 <div className="col-lg-2">
-                                    <button type="button" className="btn5" >Verify</button>
+                                    <button type="submit" className="btn5" >Verify</button>
                                 </div>
 
                              </div>
