@@ -28,9 +28,8 @@ function Login() {
                 }, 1000)
         }
 },[userError])
-    const submitForm = (event) => {
+    const submitForm = async (event) => {
         event.preventDefault();
-         console.log(event);
         setUserError(Validate(user));
         setIsSubmit(true);
 
@@ -54,7 +53,7 @@ function Login() {
         if(!values.password){
             error.password="**Password Is Required!";
         }else if(!regexPass.test(values.password)){
-            error.password="**password must contain atleast number,character!";
+            error.password="**This is not a valid password!";
         }
         if(values.password.length < 8){
             error.password="**Password must be more than 8 characters!";
