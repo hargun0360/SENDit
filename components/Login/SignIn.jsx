@@ -1,8 +1,9 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState} from 'react'
 import Navbar from '../Navbar/Navbar'
 import {Link} from 'react-router-dom'
 import Image from '../Imagecompo/Image'
 import './Login.css'
+import axios from 'axios'
 
 function Sign(){
 
@@ -16,19 +17,36 @@ function Sign(){
     const [allEntry, setallEntery] = useState([]);
     const [userError,setUserError]=useState({});
     const [isSubmit,setIsSubmit] = useState(false);
-    useEffect(()=>{
-        if(Object.keys(userError).length===0 && isSubmit){
-            const newEntry = { ...user }
-        setallEntery([...allEntry, newEntry]);
-            setUser({ ...user, Name: "", email: "", password: "", cpassword: "" });
-                window.alert("Submission Successfull");
-        }
-},[userError])
-    const submitForm = async (event) => {
-
+    const submitForm = (event) => {
         event.preventDefault();
         setUserError(Validate(user));
         setIsSubmit(true);
+        if(Object.keys(userError).length===0 && isSubmit){
+            const newEntry = { ...user }
+        setallEntery([...allEntry, newEntry]);
+        let object ={
+            username:newEntry.email,
+            password:newEntry.password
+        }
+        // DATA transfer and get response
+        const config ={
+            method :"POST",
+            url :"https://daf7-223-233-66-68.ngrok.io/authenticate",
+            headers : {
+                "content-Type" : "application/json"
+            },
+            data : JSON.stringify(object)
+        }
+        axios(config).then((res)=>{
+            console.log(res);
+            console.log(res.data);
+        }).catch((error)=>{
+            console.log(error);
+        })
+        setUser({ ...user, Name: "", email: "", password: ""});
+            window.alert("Submission Successfull");
+    }
+
     }
     const Validate = (values)=>{
         const error={}
@@ -106,7 +124,7 @@ function Sign(){
                              <div className="form-row">
 
                             
-                                    <label className="lab"><input type="checkbox" name=" " id="checkbox" />Remember Me</label>
+                                    <label className="lab"><input type="checkbox" name="check" id="checkbox" />Remember Me</label>
                                     
                                 </div>
 

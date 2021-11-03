@@ -1,8 +1,9 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState } from 'react'
 import Navbar from '../Navbar/Navbar'
 import { Link, useHistory } from 'react-router-dom'
 import Image from '../Imagecompo/Image'
 import './SignUp.css'
+import axios from 'axios';
 
 function Login() {
     const [user, setUser] = useState({ Name: "", email: "", password: "", cpassword: "" })
@@ -17,21 +18,42 @@ function Login() {
     const history = useHistory();
     const [userError,setUserError]=useState({});
     const [isSubmit,setIsSubmit] = useState(false);
-    useEffect(()=>{
-        if(Object.keys(userError).length===0 && isSubmit){
-            const newEntry = { ...user }
-        setallEntery([...allEntry, newEntry]);
-            setUser({ ...user, Name: "", email: "", password: "", cpassword: "" });
-                window.alert("Submission Successfull");
-                setTimeout(() => {
-                    history.push("/OTP");
-                }, 1000)
-        }
-},[userError])
-    const submitForm = async (event) => {
+
+    const submitForm = (event) => {
         event.preventDefault();
         setUserError(Validate(user));
         setIsSubmit(true);
+        if(Object.keys(userError).length===0 && isSubmit){
+            const newEntry = { ...user }
+        setallEntery([...allEntry, newEntry]);
+        let object ={
+            name:newEntry.Name,
+            mailAddress:newEntry.email,
+            password:newEntry.password
+        }
+        // DATA transfer and get response
+        const config ={
+            method :"POST",
+            url :"https://daf7-223-233-66-68.ngrok.io/user/generateOtp",
+            headers : {
+                "content-Type" : "application/json"
+            },
+            data : JSON.stringify(object)
+        }
+        axios(config).then((res)=>{
+            console.log(res);
+            console.log(res.data);
+        }).catch((error)=>{
+            console.log(error);
+        })
+
+        setUser({ ...user, Name: "", email: "", password: "", cpassword: "" });
+            window.alert("Submission Successfull");
+            setTimeout(() => {
+                history.push("/OTP");
+            }, 1000)
+        }
+        
 
     }
     
@@ -63,7 +85,7 @@ function Login() {
         if(!values.cpassword){
             error.cpassword="**Password Is Required!";
         }
-        if(values.cpassword!=values.password){
+        if(values.cpassword!==values.password){
             error.cpassword="**Password Is not match!";
         }
 
@@ -151,19 +173,3 @@ function Login() {
 }
 
 export default Login;
-
-
-// const res = await fetch("/", {
-        //     method="POST",
-        //     headers:{
-        //         "Content-Type" : "application/json"
-        //     },
-        //     body:JSON.stringify({newEntry})
-        // });
-        // const data = await res.json();
-        // if(res.status === 422 || !data){
-        //     window.alert("Registration Fail");
-        // }
-        // else{
-        //     window.alert("registration Successfull");
-        // }

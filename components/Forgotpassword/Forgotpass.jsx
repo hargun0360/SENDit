@@ -1,8 +1,9 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState} from 'react'
 import Navbar from '../Navbar/Navbar'
 import Image from '../Imagecompo/Image'
 import './Forgot.css'
 import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 
 function Forgot() {
     const [user, setUser] = useState({ email: "", newpassword: "" })
@@ -16,21 +17,40 @@ function Forgot() {
     const history = useHistory();
     const [userError,setUserError]=useState({});
     const [isSubmit,setIsSubmit] = useState(false);
-    useEffect(()=>{
-        if(Object.keys(userError).length===0 && isSubmit){
-            const newEntry = { ...user }
-        setallEntery([...allEntry, newEntry]);
-            setUser({ ...user,email: "", newpassword: "" });
-                window.alert("Submission Successfull");
-                setTimeout(() => {
-                    history.push("/OTP");
-                }, 1000)
-        }
-},[userError])
-    const submitForm = async (event) => {
+    const submitForm = (event) => {
         event.preventDefault();
         setUserError(Validate(user));
         setIsSubmit(true);
+        if(Object.keys(userError).length===0 && isSubmit){
+            const newEntry = { ...user }
+        setallEntery([...allEntry, newEntry]);
+        let object ={
+            mailAddress:newEntry.email,
+            password:newEntry.newpassword
+        }
+        // DATA transfer and get response
+        const config ={
+            method :"POST",
+            url :"https://reqres.in/api/users",
+            headers : {
+                "content-Type" : "application/json"
+            },
+            data : JSON.stringify(object)
+        }
+        axios(config).then((res)=>{
+            console.log(res);
+            console.log(res.data);
+        }).catch((error)=>{
+            console.log(error);
+        })
+
+        setUser({ ...user, Name: "", email: "", password: "", cpassword: "" });
+            window.alert("Submission Successfull");
+            setTimeout(() => {
+                history.push("/OTP");
+            }, 1000)
+        }
+        
 
     }
     
