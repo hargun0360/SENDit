@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom'
 import Image from '../Imagecompo/Image'
 import './Login.css'
 import axios from 'axios'
-import {storage} from '../otp/Helper'
 
 function Sign(){
 
@@ -33,7 +32,7 @@ function Sign(){
         // DATA transfer and get response
         const config ={
             method :"POST",
-            url :"https://5598-223-233-66-68.ngrok.io/authenticate",
+            url :"https://cfdf-223-233-66-68.ngrok.io/authenticate",
             headers : {
                 "content-Type" : "application/json"
             },
@@ -44,7 +43,7 @@ function Sign(){
             console.log(res);
             console.log(res.data);
         
-                storage(res.token);
+                localStorage.setItem('tokendata',res.token);
                 console.log(localStorage.getItem('tokendata'));
             
         }).catch((error)=>{

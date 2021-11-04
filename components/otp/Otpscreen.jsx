@@ -7,7 +7,7 @@ import {useHistory } from 'react-router-dom'
 
 
 
-function Otp(props) {
+function Otp() {
 
     const [user, setUser] = useState({ otp: "" })
     let name, value;
@@ -31,10 +31,11 @@ function Otp(props) {
             mailAddress : history.location.state.mailAddress,
             password : history.location.state.password
         }
+        
         // const object1 = props.location.state || {object,JSON.};
         const config = {
             method: "POST",
-            url: "https://5598-223-233-66-68.ngrok.io/user/validate",
+            url: "https://cfdf-223-233-66-68.ngrok.io/user/validate",
             headers: {
                 "content-Type": "application/json"
             },

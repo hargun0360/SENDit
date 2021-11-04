@@ -31,15 +31,15 @@ function Forgot() {
         // DATA transfer and get response
         const config ={
             method :"POST",
-            url :"https://reqres.in/api/users",
+            url :"https://cfdf-223-233-66-68.ngrok.io/user/forgot",
             headers : {
                 "content-Type" : "application/json"
             },
             data : JSON.stringify(object)
         }
         axios(config).then((res)=>{
-            console.log(res);
-            console.log(res.data);
+            // console.log(res.data);
+
         }).catch((error)=>{
             console.log(error);
         })
@@ -47,7 +47,10 @@ function Forgot() {
         setUser({ ...user, Name: "", email: "", password: "", cpassword: "" });
             window.alert("Submission Successfull");
             setTimeout(() => {
-                history.push("/OTP");
+                history.push({
+                    pathname : "/OTPP",
+                    state : newEntry
+                });
             }, 1000)
         }
         
