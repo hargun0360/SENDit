@@ -6,6 +6,7 @@ import axios from 'axios'
 import {useHistory } from 'react-router-dom'
 
 
+
 function Otp(props) {
 
     const [user, setUser] = useState({ otp: "" })
@@ -21,25 +22,31 @@ function Otp(props) {
 
     const submitForm = (event) => {
         event.preventDefault();
-        const newEntry = { ...user }
+        const newEntry = { ...user}
         setallEntery([...allEntry, newEntry]);
+
         let object = {
             givenOtp: newEntry.otp
         }
+        // const object1 = props.location.state || {object,JSON.};
         const config = {
             method: "POST",
-            url: "https://daf7-223-233-66-68.ngrok.io/user/validate",
+            url: "https://6cfe-223-233-66-68.ngrok.io/user/validate",
             headers: {
                 "content-Type": "application/json"
             },
-            params: {
-
-                givenOtp:object.givenOtp
-            }
+            data : JSON.stringify(object)
         }
         axios(config).then((res) => {
             if(res.data==="Entered Otp is valid"){
                 window.alert("Verified SuccessFully");
+                // const object={
+                //     userId:res.userId,
+                //     token:res.token
+                // }
+                // storage(object);
+                // console.log(store);
+                // console.log(localStorage.getItem('tokendata'));
                 history.push("/SignIn");
             }else{
                 window.alert("Invalid OTP");

@@ -34,7 +34,7 @@ function Login() {
         // DATA transfer and get response
         const config ={
             method :"POST",
-            url :"https://daf7-223-233-66-68.ngrok.io/user/generateOtp",
+            url :"https://6cfe-223-233-66-68.ngrok.io/user/generateOtp",
             headers : {
                 "content-Type" : "application/json"
             },
@@ -50,7 +50,10 @@ function Login() {
         setUser({ ...user, Name: "", email: "", password: "", cpassword: "" });
             window.alert("Submission Successfull");
             setTimeout(() => {
-                history.push("/OTP");
+                history.push({
+                    pathname : "/OTP",
+                    state : {object}
+                });
             }, 1000)
         }
         
