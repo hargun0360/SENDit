@@ -1,6 +1,5 @@
-import {useEffect} from 'react'
 
-export const result = [];
+
 
 export function storage(store){
 

@@ -26,36 +26,44 @@ function Otp(props) {
         setallEntery([...allEntry, newEntry]);
 
         let object = {
-            givenOtp: newEntry.otp
+            otp: newEntry.otp,
+            name: history.location.state.name,
+            mailAddress : history.location.state.mailAddress,
+            password : history.location.state.password
         }
         // const object1 = props.location.state || {object,JSON.};
         const config = {
             method: "POST",
-            url: "https://6cfe-223-233-66-68.ngrok.io/user/validate",
+            url: "https://5598-223-233-66-68.ngrok.io/user/validate",
             headers: {
                 "content-Type": "application/json"
             },
             data : JSON.stringify(object)
         }
+        console.log(config.data);
         axios(config).then((res) => {
-            if(res.data==="Entered Otp is valid"){
-                window.alert("Verified SuccessFully");
-                // const object={
-                //     userId:res.userId,
-                //     token:res.token
+            console.log(res);
+            // if(res.data==="Entered Otp is valid"){
+            //     window.alert("Verified SuccessFully");
+            //     console.log(res);
+            //     console.log(res.data);
+                //  const object2={
+                //     token:res.data
                 // }
+                // console.log(object2);
                 // storage(object);
                 // console.log(store);
                 // console.log(localStorage.getItem('tokendata'));
-                history.push("/SignIn");
-            }else{
-                window.alert("Invalid OTP");
-                    history.push("/");
-            }
+                // history.push("/SignIn");
+            // }else{
+            //     window.alert("Invalid OTP");
+                
+            //         // history.push("/");
+            // }
         }).catch((error) => {
             console.log(error);
         })
-        setUser({ ...user, otp: "" });
+        // setUser({ ...user, otp: "" });
         window.alert("Submission Successfull");
     }
 

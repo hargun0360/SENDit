@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import Image from '../Imagecompo/Image'
 import './Login.css'
 import axios from 'axios'
-import {store,storage} from '../otp/Helper'
+import {storage} from '../otp/Helper'
 
 function Sign(){
 
@@ -25,6 +25,7 @@ function Sign(){
         if(Object.keys(userError).length===0 && isSubmit){
             const newEntry = { ...user }
         setallEntery([...allEntry, newEntry]);
+        console.log(newEntry);
         let object ={
             username:newEntry.email,
             password:newEntry.password
@@ -32,20 +33,18 @@ function Sign(){
         // DATA transfer and get response
         const config ={
             method :"POST",
-            url :"https://6cfe-223-233-66-68.ngrok.io/authenticate",
+            url :"https://5598-223-233-66-68.ngrok.io/authenticate",
             headers : {
                 "content-Type" : "application/json"
             },
             data : JSON.stringify(object)
         }
+        
         axios(config).then((res)=>{
             console.log(res);
             console.log(res.data);
-            const object11={
-                    userId:res.userId,
-                    token:res.token
-                }
-                storage(object11);
+        
+                storage(res.token);
                 console.log(localStorage.getItem('tokendata'));
             
         }).catch((error)=>{
@@ -60,7 +59,7 @@ function Sign(){
         const error={}
         const regexMail=/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/
         const regexName=/^[A-Za-z. ]{3,30}$/;
-        const regexPass=/^[a-zA-Z0-9@#!$%^_]{8,12}$/;
+        const regexPass=/^[a-zA-Z0-9@#!$%^_]{8,}$/;
         if(!values.Name){
             error.Name="**Name Is Required!";
         }else if(!regexName.test(values.Name)){
