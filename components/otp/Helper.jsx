@@ -4,8 +4,7 @@ import Image from '../Imagecompo/Image'
 import './otp.css'
 import axios from 'axios'
 import {useHistory } from 'react-router-dom'
-
-
+import Error from '../Error/Error'
 
 function Otpp() {
 
@@ -32,41 +31,28 @@ function Otpp() {
             password : history.location.state.newpassword
         }
         console.log(object);
-        
-        // const object1 = props.location.state || {object,JSON.};
         const config = {
             method: "POST",
-            url: "https://cfdf-223-233-66-68.ngrok.io/user/forgotValidate",
+            url: "https://8893-223-233-66-68.ngrok.io/user/forgotValidate",
             headers: {
                 "content-Type": "application/json"
             },
             data : JSON.stringify(object)
         }
-        console.log(config.data);
         axios(config).then((res) => {
             console.log(res);
-            // if(res.data==="Entered Otp is valid"){
-            //     window.alert("Verified SuccessFully");
-            //     console.log(res);
-            //     console.log(res.data);
-                //  const object2={
-                //     token:res.data
-                // }
-                // console.log(object2);
-                // storage(object);
-                // console.log(store);
-                // console.log(localStorage.getItem('tokendata'));
-                // history.push("/SignIn");
-            // }else{
-            //     window.alert("Invalid OTP");
-                
-            //         // history.push("/");
-            // }
+            if(res.data === "Changed the password successfully"){
+                alert("Changed the password Successfully");
+                history.push("/");
+            }else if(res.data === "Entered Otp is NOT valid. Please Retry!"){
+                alert("Entered Otp is NOT valid. Please Retry!");
+                history.push("/Forgotpassword");
+            }
+
         }).catch((error) => {
-            console.log(error);
+           <Error />
         })
-        // setUser({ ...user, otp: "" });
-        window.alert("Submission Successfull");
+        setUser({ ...user, otp: "" });
     }
 
     return (

@@ -34,7 +34,7 @@ function Navbar(props) {
 
                         {isname ? <Link to="/SignIn">
                             <button type="button" className="btn3" onClick={handleClick}><span style={style}>{props.name}</span></button>
-                        </Link> : <Link to="/">
+                        </Link> : <Link to="/SignUp">
                             <button type="button" className="btn3" onClick={handleClick}><span style={style}>{props.name}</span></button>
                         </Link>}
                     </li>

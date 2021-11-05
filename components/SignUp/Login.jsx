@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom'
 import Image from '../Imagecompo/Image'
 import './SignUp.css'
 import axios from 'axios';
+import Error from '../Error/Error'
 
 function Login() {
     const [user, setUser] = useState({ Name: "", email: "", password: "", cpassword: "" })
@@ -34,7 +35,7 @@ function Login() {
         // DATA transfer and get response
         const config ={
             method :"POST",
-            url :"https://cfdf-223-233-66-68.ngrok.io/user/generateOtp",
+            url :"https://8893-223-233-66-68.ngrok.io/user/generateOtp",
             headers : {
                 "content-Type" : "application/json"
             },
@@ -42,19 +43,22 @@ function Login() {
         }
         axios(config).then((res)=>{
             console.log(res);
-            console.log(res.data);
-        }).catch((error)=>{
-            console.log(error);
-        })
-
-        setUser({ ...user, Name: "", email: "", password: "", cpassword: "" });
-            window.alert("Submission Successfull");
-            // setTimeout(() => {
+            if(res.data === "You already have an account please Login"){
+                alert("You already have an account please Login");
+                history.push("/SignIn");
+            }
+            else if(res.data === "Otp Sent"){
+                alert("Otp Sent successfully");
                 history.push({
                     pathname : "/OTP",
                     state : object
                 });
-            // }, 1000)
+            }
+        }).catch((error)=>{
+            <Error />
+        })
+            setUser({ ...user, Name: "", email: "", password: "", cpassword: "" });
+            
         }
         
 

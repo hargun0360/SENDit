@@ -4,10 +4,13 @@ import {Link} from 'react-router-dom'
 import Image from '../Imagecompo/Image'
 import './Login.css'
 import axios from 'axios'
+import Error from '../Error/Error'
+import {useHistory} from 'react-router-dom'
 
 function Sign(){
 
     const [user,setUser] = useState({Name:"",email:"",password:""})
+    const history = useHistory();
     let name,value;
     const handleInputs=(e)=>{
         name=e.target.name;
@@ -32,7 +35,7 @@ function Sign(){
         // DATA transfer and get response
         const config ={
             method :"POST",
-            url :"https://cfdf-223-233-66-68.ngrok.io/authenticate",
+            url :"https://8893-223-233-66-68.ngrok.io/authenticate",
             headers : {
                 "content-Type" : "application/json"
             },
@@ -40,17 +43,21 @@ function Sign(){
         }
         
         axios(config).then((res)=>{
-            console.log(res);
             console.log(res.data);
         
-                localStorage.setItem('tokendata',res.token);
+                localStorage.setItem('tokendata',res.data);
                 console.log(localStorage.getItem('tokendata'));
-            
-        }).catch((error)=>{
-            console.log(error);
+
+                history.push("/");
+
+                // if(res.data==="Error message"){
+                //     alert("Error message");
+                //     history.push("/SignUp");
+                // }
+            }).catch((error)=>{
+            <Error />
         })
         setUser({ ...user, Name: "", email: "", password: ""});
-            window.alert("Submission Successfull");
     }
 
     }
@@ -88,7 +95,7 @@ function Sign(){
             <Navbar name="Sign Up" />
             <Image />
             <div className="container">
-            <h3 className="heading1">Get Your Account Log In</h3>
+            <h3 className="heading1">Get Your Account Sign In</h3>
             <div className="row">
                  <div className = "col-lg-12">
                      
@@ -147,7 +154,7 @@ function Sign(){
                          </form>
                          <div className="question">
                                     <p className="qt">Don't have any account?
-                                    <Link to="/" className="linktext" style={{textDecoration:"none",marginLeft:"7px"}}>Sign Up</Link>
+                                    <Link to="/SignUp" className="linktext" style={{textDecoration:"none",marginLeft:"7px"}}>Sign Up</Link>
                                     </p>
                             </div>
                             <div className="forgot">
