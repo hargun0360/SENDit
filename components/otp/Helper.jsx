@@ -33,7 +33,7 @@ function Otpp() {
         console.log(object);
         const config = {
             method: "POST",
-            url: "https://8893-223-233-66-68.ngrok.io/user/forgotValidate",
+            url: "https://ccf4-223-233-66-68.ngrok.io/user/forgotValidate",
             headers: {
                 "content-Type": "application/json"
             },
@@ -53,6 +53,30 @@ function Otpp() {
            <Error />
         })
         setUser({ ...user, otp: "" });
+    }
+    const handleClick = ()=>{
+        let again ={
+            name: "ABCD",
+            mailAddress : history.location.state.email,
+            password : history.location.state.newpassword
+        }
+
+        console.log(again);
+        const configuration = {
+
+            method: "POST",
+            url: "https://ccf4-223-233-66-68.ngrok.io/user/forgot",
+            headers: {
+                "content-Type": "application/json"
+            },
+            data : JSON.stringify(again)
+
+        }
+        axios(configuration).then((res) => {
+            console.log(res);
+            // alert("otp sent successfully");
+            
+        })
     }
 
     return (
@@ -82,6 +106,15 @@ function Otpp() {
                             </div>
 
                         </div>
+
+                        <div className="form-row" id="gg">
+
+                            <div className="col-lg-2">
+                                <button type="submit" className="btn5" onClick={handleClick}>Resend</button>
+                            </div>
+
+                        </div>
+
 
                     </form>
                 </div>

@@ -18,7 +18,7 @@ function Otp() {
     }
     const [allEntry, setallEntery] = useState([]);
     const history = useHistory();
-
+    
 
     const submitForm = (event) => {
         event.preventDefault();
@@ -34,7 +34,7 @@ function Otp() {
         
         const config = {
             method: "POST",
-            url: "https://8893-223-233-66-68.ngrok.io/user/validate",
+            url: "https://ccf4-223-233-66-68.ngrok.io/user/validate",
             headers: {
                 "content-Type": "application/json"
             },
@@ -54,6 +54,31 @@ function Otp() {
             <Error />
         })
         setUser({ ...user, otp: "" });
+    }
+    
+    const handleClick = ()=>{
+        let again ={
+            name: history.location.state.name,
+            mailAddress : history.location.state.mailAddress,
+            password : history.location.state.password
+        }
+
+        console.log(again);
+        const configuration = {
+
+            method: "POST",
+            url: "https://ccf4-223-233-66-68.ngrok.io/user/generateOtp",
+            headers: {
+                "content-Type": "application/json"
+            },
+            data : JSON.stringify(again)
+
+        }
+        axios(configuration).then((res) => {
+            console.log(res);
+            // alert("otp sent successfully");
+            
+        })
     }
 
     return (
@@ -80,6 +105,13 @@ function Otp() {
 
                             <div className="col-lg-2">
                                 <button type="submit" className="btn5" >Verify</button>
+                            </div>
+
+                        </div>
+                        <div className="form-row" id="gg">
+
+                            <div className="col-lg-2">
+                                <button type="submit" className="btn5" onClick={handleClick} >Resend</button>
                             </div>
 
                         </div>

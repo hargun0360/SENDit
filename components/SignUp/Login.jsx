@@ -35,7 +35,7 @@ function Login() {
         // DATA transfer and get response
         const config ={
             method :"POST",
-            url :"https://8893-223-233-66-68.ngrok.io/user/generateOtp",
+            url :"https://ccf4-223-233-66-68.ngrok.io/user/generateOtp",
             headers : {
                 "content-Type" : "application/json"
             },

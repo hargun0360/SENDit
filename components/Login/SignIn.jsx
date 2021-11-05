@@ -27,7 +27,6 @@ function Sign(){
         if(Object.keys(userError).length===0 && isSubmit){
             const newEntry = { ...user }
         setallEntery([...allEntry, newEntry]);
-        console.log(newEntry);
         let object ={
             username:newEntry.email,
             password:newEntry.password
@@ -35,7 +34,7 @@ function Sign(){
         // DATA transfer and get response
         const config ={
             method :"POST",
-            url :"https://8893-223-233-66-68.ngrok.io/authenticate",
+            url :"https://ccf4-223-233-66-68.ngrok.io/authenticate",
             headers : {
                 "content-Type" : "application/json"
             },
@@ -43,18 +42,17 @@ function Sign(){
         }
         
         axios(config).then((res)=>{
-            console.log(res.data);
-        
-                localStorage.setItem('tokendata',res.data);
-                console.log(localStorage.getItem('tokendata'));
-
+            console.log(res);
+            
+                console.log(res.data.token);
+                localStorage.setItem('tokendata',res.data.token);
                 history.push("/");
+            if(res.data==="Invalid credentials"){
+                alert("Invalid credentials");
+                history.push("/SignIn");
+            }
 
-                // if(res.data==="Error message"){
-                //     alert("Error message");
-                //     history.push("/SignUp");
-                // }
-            }).catch((error)=>{
+            }).catch(()=>{
             <Error />
         })
         setUser({ ...user, Name: "", email: "", password: ""});

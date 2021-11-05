@@ -32,7 +32,7 @@ function Forgot() {
             // DATA transfer and get response
             const config = {
                 method: "POST",
-                url: "https://8893-223-233-66-68.ngrok.io/user/forgot",
+                url: "https://ccf4-223-233-66-68.ngrok.io/user/forgot",
                 headers: {
                     "content-Type": "application/json"
                 },
@@ -40,7 +40,7 @@ function Forgot() {
             }
             axios(config).then((res) => {
                 console.log(res);
-                if (res.data === "seems like that you dont have any account") {
+                if (res.data === "seems like you dont have any account") {
                     alert("seems that you don't have any account");
                     history.push("/SignUp");
                 }
