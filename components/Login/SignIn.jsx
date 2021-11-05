@@ -3,10 +3,14 @@ import Navbar from '../Navbar/Navbar'
 import {Link} from 'react-router-dom'
 import Image from '../Imagecompo/Image'
 import './Login.css'
+import axios from 'axios'
+import Error from '../Error/Error'
+import {useHistory} from 'react-router-dom'
 
 function Sign(){
 
     const [user,setUser] = useState({Name:"",email:"",password:""})
+    const history = useHistory();
     let name,value;
     const handleInputs=(e)=>{
         name=e.target.name;
@@ -14,12 +18,76 @@ function Sign(){
         setUser({...user,[name]:value});
     }
     const [allEntry, setallEntery] = useState([]);
-    const submitForm = async (event) => {
-
+    const [userError,setUserError]=useState({});
+    const [isSubmit,setIsSubmit] = useState(false);
+    const submitForm = (event) => {
         event.preventDefault();
-        const newEntry = {...user}
+        setUserError(Validate(user));
+        setIsSubmit(true);
+        if(Object.keys(userError).length===0 && isSubmit){
+            const newEntry = { ...user }
         setallEntery([...allEntry, newEntry]);
-        setUser({ ...user, Name: "", email: "", password: "" });
+        console.log(newEntry);
+        let object ={
+            username:newEntry.email,
+            password:newEntry.password
+        }
+        // DATA transfer and get response
+        const config ={
+            method :"POST",
+            url :"https://8893-223-233-66-68.ngrok.io/authenticate",
+            headers : {
+                "content-Type" : "application/json"
+            },
+            data : JSON.stringify(object)
+        }
+        
+        axios(config).then((res)=>{
+            console.log(res.data);
+        
+                localStorage.setItem('tokendata',res.data);
+                console.log(localStorage.getItem('tokendata'));
+
+                history.push("/");
+
+                // if(res.data==="Error message"){
+                //     alert("Error message");
+                //     history.push("/SignUp");
+                // }
+            }).catch((error)=>{
+            <Error />
+        })
+        setUser({ ...user, Name: "", email: "", password: ""});
+    }
+
+    }
+    const Validate = (values)=>{
+        const error={}
+        const regexMail=/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/
+        const regexName=/^[A-Za-z. ]{3,30}$/;
+        const regexPass=/^[a-zA-Z0-9@#!$%^_]{8,}$/;
+        if(!values.Name){
+            error.Name="**Name Is Required!";
+        }else if(!regexName.test(values.Name)){
+            error.Name="**This is not a valid Name format!";
+        }
+        if(!values.email){
+            error.email="**Email Is Required!";
+        }else if(!regexMail.test(values.email)){
+            error.email="**This is not a valid Email format!";
+        }
+        if(!values.password){
+            error.password="**Password Is Required!";
+        }else if(values.password.length < 8){
+            error.password="**Password must be more than 8 characters!";
+        }else if(values.password.length > 12){
+            error.password="**Password must be less than 12 characters!";
+        }else if(!regexPass.test(values.password)){
+            error.password="**This is not a valid password!";
+        }
+
+        return error;
+
     }
     return(
         
@@ -27,7 +95,7 @@ function Sign(){
             <Navbar name="Sign Up" />
             <Image />
             <div className="container">
-            <h3 className="heading1">Get Your Account Log In</h3>
+            <h3 className="heading1">Get Your Account Sign In</h3>
             <div className="row">
                  <div className = "col-lg-12">
                      
@@ -40,33 +108,36 @@ function Sign(){
 
                                 <div className="col-lg-2">
                                 <i className="fa fa-user icon"></i>
-                                    <input type="text" name="Name" placeholder="Your Name" autoComplete="off" value={user.Name} onChange={handleInputs} className="input1" size="30" required />
+                                    <input type="text" name="Name" placeholder="Your Name" autoComplete="off" value={user.Name} onChange={handleInputs} className="input1" size="30" />
                                 </div>
 
                              </div>
+                             <p className="required">{userError.Name}</p>
                              
                              <div className="form-row">
 
                                 <div className="col-lg-2">
                                 <i className="fa fa-envelope icon"></i>
-                                    <input type="email" name="email" placeholder="Email" value={user.email} onChange={handleInputs} className="input1" size="30" required />
+                                    <input type="email" name="email" placeholder="Email" value={user.email} onChange={handleInputs} className="input1" size="30" />
                                 </div>
 
                              </div>
+                             <p className="required">{userError.email}</p>
                              
                              <div className="form-row">
 
                                 <div className="col-lg-2">
                                 <i className="fa fa-lock icon"></i>
-                                    <input type="password" name="password" placeholder="Password" value={user.password} onChange={handleInputs} className="input1" size="30" required />
+                                    <input type="password" name="password" placeholder="Password" value={user.password} onChange={handleInputs} className="input1" size="30" />
                                 </div>
 
                              </div>
+                             <p className="required">{userError.password}</p>
 
                              <div className="form-row">
 
                             
-                                    <label className="lab"><input type="checkbox" name=" " id="checkbox" />Remember Me</label>
+                                    <label className="lab"><input type="checkbox" name="check" id="checkbox" />Remember Me</label>
                                     
                                 </div>
 
@@ -83,7 +154,7 @@ function Sign(){
                          </form>
                          <div className="question">
                                     <p className="qt">Don't have any account?
-                                    <Link to="/" className="linktext" style={{textDecoration:"none",marginLeft:"7px"}}>Sign Up</Link>
+                                    <Link to="/SignUp" className="linktext" style={{textDecoration:"none",marginLeft:"7px"}}>Sign Up</Link>
                                     </p>
                             </div>
                             <div className="forgot">

@@ -17,3 +17,10 @@
 #checkbox{
     border-radius: 50%;
 }
+.required{
+
+    font-size: 10px;
+    color: red;
+    padding: 0% 10%;
+    width: 133%;
+}

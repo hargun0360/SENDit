@@ -6,8 +6,7 @@ import axios from 'axios'
 import {useHistory } from 'react-router-dom'
 import Error from '../Error/Error'
 
-
-function Otp() {
+function Otpp() {
 
     const [user, setUser] = useState({ otp: "" })
     let name, value;
@@ -27,14 +26,14 @@ function Otp() {
 
         let object = {
             otp: newEntry.otp,
-            name: history.location.state.name,
-            mailAddress : history.location.state.mailAddress,
-            password : history.location.state.password
+            name: "ABCD",
+            mailAddress : history.location.state.email,
+            password : history.location.state.newpassword
         }
-        
+        console.log(object);
         const config = {
             method: "POST",
-            url: "https://8893-223-233-66-68.ngrok.io/user/validate",
+            url: "https://8893-223-233-66-68.ngrok.io/user/forgotValidate",
             headers: {
                 "content-Type": "application/json"
             },
@@ -42,16 +41,16 @@ function Otp() {
         }
         axios(config).then((res) => {
             console.log(res);
-            if(res.data === "You are registered successfully"){
-                alert("You are registered Successfully");
+            if(res.data === "Changed the password successfully"){
+                alert("Changed the password Successfully");
                 history.push("/");
             }else if(res.data === "Entered Otp is NOT valid. Please Retry!"){
                 alert("Entered Otp is NOT valid. Please Retry!");
-                history.push("/SignUp")
+                history.push("/Forgotpassword");
             }
-            
+
         }).catch((error) => {
-            <Error />
+           <Error />
         })
         setUser({ ...user, otp: "" });
     }
@@ -94,4 +93,10 @@ function Otp() {
 
 }
 
-export default Otp;
+export default Otpp;
+
+
+
+
+   
+    

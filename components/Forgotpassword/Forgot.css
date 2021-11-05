@@ -10,3 +10,10 @@
     border-radius: 4px;
     border-style: none;
 }
+.required{
+
+    font-size: 10px;
+    color: red;
+    padding: 0% 5%;
+    width: 133%;
+}

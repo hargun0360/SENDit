@@ -9,3 +9,11 @@
     background-color: #1995AF;
     padding: 10px 400%;
 }
+
+.required{
+
+    font-size: 10px;
+    color: red;
+    padding: 0% 5%;
+    width: 133%;
+}
