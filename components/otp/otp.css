@@ -15,3 +15,18 @@
 #gg{
     margin-top: 3%;
 }
+@media (min-width:1393px){
+    .btn5{
+        padding: 10px 55%;
+    }
+}
+@media (max-width:1199px) and (min-width:991px){
+    .btn5{
+        padding: 10px 75%;
+    }
+}
+@media (max-width:991px){
+    .btn5{
+        padding: 10px 16%;
+    }
+}

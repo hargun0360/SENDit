@@ -11,7 +11,6 @@ import {BaseUrl} from '../../api/Baseurl'
 
 function Send() {
 
-    
 
     const [users, setUsers] = useState([{ name: "" }]);
     let array = [];

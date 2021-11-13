@@ -1,0 +1,7 @@
+.Mail-box{
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    background-color: whitesmoke;
+}

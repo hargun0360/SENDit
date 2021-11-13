@@ -5,6 +5,7 @@ import './otp.css'
 import axios from 'axios'
 import {useHistory } from 'react-router-dom'
 import Error from '../Error/Error'
+import {BaseUrl} from '../../api/Baseurl'
 
 function Otpp() {
 
@@ -33,7 +34,7 @@ function Otpp() {
         console.log(object);
         const config = {
             method: "POST",
-            url: "https://ccf4-223-233-66-68.ngrok.io/user/forgotValidate",
+            url: BaseUrl() + "api/user/forgotValidate",
             headers: {
                 "content-Type": "application/json"
             },
@@ -43,7 +44,7 @@ function Otpp() {
             console.log(res);
             if(res.data === "Changed the password successfully"){
                 alert("Changed the password Successfully");
-                history.push("/");
+                history.push("/Error");
             }else if(res.data === "Entered Otp is NOT valid. Please Retry!"){
                 alert("Entered Otp is NOT valid. Please Retry!");
                 history.push("/Forgotpassword");
@@ -65,7 +66,7 @@ function Otpp() {
         const configuration = {
 
             method: "POST",
-            url: "https://ccf4-223-233-66-68.ngrok.io/user/forgot",
+            url: (BaseUrl() + "api/user/forgot"),
             headers: {
                 "content-Type": "application/json"
             },
