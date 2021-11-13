@@ -5,6 +5,7 @@ import './otp.css'
 import axios from 'axios'
 import {useHistory } from 'react-router-dom'
 import Error from '../Error/Error'
+import {BaseUrl} from '../../api/Baseurl'
 
 
 function Otp() {
@@ -34,7 +35,7 @@ function Otp() {
         
         const config = {
             method: "POST",
-            url: "https://ccf4-223-233-66-68.ngrok.io/user/validate",
+            url: BaseUrl() + "api/user/validate",
             headers: {
                 "content-Type": "application/json"
             },
@@ -44,10 +45,10 @@ function Otp() {
             console.log(res);
             if(res.data === "You are registered successfully"){
                 alert("You are registered Successfully");
-                history.push("/");
+                history.push("/Error");
             }else if(res.data === "Entered Otp is NOT valid. Please Retry!"){
                 alert("Entered Otp is NOT valid. Please Retry!");
-                history.push("/SignUp")
+                history.push("/OTP")
             }
             
         }).catch((error) => {
@@ -67,7 +68,7 @@ function Otp() {
         const configuration = {
 
             method: "POST",
-            url: "https://ccf4-223-233-66-68.ngrok.io/user/generateOtp",
+            url: (BaseUrl() + "api/user/generateOtp"),
             headers: {
                 "content-Type": "application/json"
             },

@@ -17,3 +17,28 @@
     padding: 0% 5%;
     width: 133%;
 }
+/* @media (max-width:1199px) and (min-width:991px){
+    .btn4{
+        padding: 10px 75%;
+    }
+}
+@media (max-width:991px){
+    .btn4{
+        padding: 10px 16%;
+    }
+} */
+@media (min-width:1400px){
+    .btn4{
+        padding:10px 340% ;
+    }
+}
+@media (max-width:1200px) and (min-width:993px){
+    .btn4 {
+        padding:10px 485% ;
+    }
+}
+@media (max-width:993px){
+    .btn4{
+        padding:10px 18% ;
+    }
+}

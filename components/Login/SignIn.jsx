@@ -6,6 +6,7 @@ import './Login.css'
 import axios from 'axios'
 import Error from '../Error/Error'
 import {useHistory} from 'react-router-dom'
+import {BaseUrl} from '../../api/Baseurl'
 
 function Sign(){
 
@@ -34,7 +35,7 @@ function Sign(){
         // DATA transfer and get response
         const config ={
             method :"POST",
-            url :"https://ccf4-223-233-66-68.ngrok.io/authenticate",
+            url: BaseUrl() + "api/authenticate",
             headers : {
                 "content-Type" : "application/json"
             },
