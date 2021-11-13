@@ -5,6 +5,7 @@ import './Forgot.css'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import Error from '../Error/Error'
+import {BaseUrl} from '../../api/Baseurl'
 
 function Forgot() {
     const [user, setUser] = useState({ email: "", newpassword: "" })
@@ -32,7 +33,7 @@ function Forgot() {
             // DATA transfer and get response
             const config = {
                 method: "POST",
-                url: "https://ccf4-223-233-66-68.ngrok.io/user/forgot",
+                url: BaseUrl() + "api/user/forgot",
                 headers: {
                     "content-Type": "application/json"
                 },

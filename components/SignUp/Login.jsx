@@ -5,6 +5,7 @@ import Image from '../Imagecompo/Image'
 import './SignUp.css'
 import axios from 'axios';
 import Error from '../Error/Error'
+import {BaseUrl} from '../../api/Baseurl'
 
 function Login() {
     const [user, setUser] = useState({ Name: "", email: "", password: "", cpassword: "" })
@@ -35,7 +36,7 @@ function Login() {
         // DATA transfer and get response
         const config ={
             method :"POST",
-            url :"https://ccf4-223-233-66-68.ngrok.io/user/generateOtp",
+            url :BaseUrl() + "api/user/generateOtp",
             headers : {
                 "content-Type" : "application/json"
             },
@@ -54,7 +55,7 @@ function Login() {
                     state : object
                 });
             }
-        }).catch((error)=>{
+        }).catch(()=>{
             <Error />
         })
             setUser({ ...user, Name: "", email: "", password: "", cpassword: "" });
@@ -102,8 +103,13 @@ function Login() {
     return (
 
         <div className="box">
-            <Navbar name="Sign In" />
-            <Image />
+          <Navbar name="Sign In" />
+        <div className="model">
+          
+            
+                <Image />
+            
+            
             <div className="container">
                 <h3 className="heading">Create Account</h3>
                 <div className="row">
@@ -137,7 +143,7 @@ function Login() {
 
                                 <div className="col-lg-2">
                                     <i className="fa fa-lock icon"></i>
-                                    <input type="password" name="password" placeholder="password" value={user.password} onChange={handleInputs} className="input1" size="30"  />
+                                    <input type="password" name="password" placeholder="Password" value={user.password} onChange={handleInputs} className="input1" size="30"  />
                                 </div>
 
                             </div>
@@ -158,7 +164,7 @@ function Login() {
                             <div className="form-row">
 
                                 <div className="col-lg-2">
-                                    <button type="submit" className="btn" >Submit</button>
+                                    <button type="submit" className="btn0" >Submit</button>
 
                                 </div>
 
@@ -175,7 +181,7 @@ function Login() {
                 </div>
             </div>
         </div>
-
+</div>
     );
 }
 

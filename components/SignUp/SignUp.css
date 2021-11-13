@@ -5,9 +5,11 @@
     padding: 0% 5% 2%  5%;
 
 }
-.btn{
+.btn0{
     background-color: #1995AF;
     padding: 10px 400%;
+    border-radius: 4px;
+    border-style: none;
 }
 
 .required{
@@ -16,4 +18,32 @@
     color: red;
     padding: 0% 5%;
     width: 133%;
+}
+
+@media (min-width:1400px){
+    .btn0{
+        padding:10px 350% ;
+    }
+}
+@media (max-width:1200px) and (min-width:991px){
+    .btn0{
+        padding:10px 485% ;
+    }
+    .qt{
+        width: 200%;
+    }
+}
+
+@media (max-width:991px){
+    .btn0{
+        padding:10px 20% ;
+    }
+    .model{
+        display: flex;
+        flex-direction:column;
+    }
+    /* .container22{
+        margin-top: 52%;
+        margin-left: 33%;
+    } */
 }

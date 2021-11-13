@@ -1,0 +1,59 @@
+.container1{
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 3fr 2fr;
+    background-color: rgb(184, 174, 174);
+}
+
+.To{
+    grid-column: 2/3;
+    grid-row: 1/-1;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+.csvfile{
+
+        grid-column: 1/2;
+        grid-row: 2/3;
+        margin-left: 14%;
+        margin-top: 5%;
+}
+
+.group-name{
+    grid-column: 1/2;
+    grid-row: 1/2;
+    margin-left: 14%;
+    margin-top: 5%;
+}
+
+.back{
+    background-color: rgb(150, 146, 146);
+}
+
+.Dropdown-name{
+    grid-column: 1/2;
+    grid-row: 3/4;
+    margin-left: 12%;
+    margin-top: -4%;
+}
+
+.Delete-group{
+    grid-column: 1/2;
+    grid-row: 4/5;
+    margin-left: 13%;
+    margin-top: 3%;
+}
+
+.button-final{
+
+    
+    grid-row: 5/6;
+    grid-column: 1/2;
+    margin-top: 8%;
+    margin-left: 12%;
+
+}
