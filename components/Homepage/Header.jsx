@@ -3,7 +3,7 @@ import Homenavbar from './Homenavbar'
 import './header.css'
 import { Link } from 'react-router-dom';
 import Features from './Features';
-import About from './About';
+
 
 function Header() {
     return (
