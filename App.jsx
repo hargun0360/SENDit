@@ -15,7 +15,7 @@ import Mail from './components/Mail/Mailbox'
 import GroupD from './components/Mail/Delete'
 import Mailtemp from './components/Mail/template'
 import Homenavbar from './components/Homepage/Homenavbar'
-import Header from './components/Homepage/Header'
+import Homepage from './components/Homepage/Homepage'
 
 
 function App(){
@@ -23,7 +23,7 @@ function App(){
     return(
         <div>
             <Switch>
-            <Route exact path="/Header" component={Header} />
+            <Route exact path="/Header" component={Homepage} />
             <Route exact path="/SignUp" component={Login} />
             <Route path="/SignIn" component={Sign} />
             <Route path="/Forgotpassword" component={Forgot} />
