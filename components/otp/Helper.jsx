@@ -10,6 +10,7 @@ import {BaseUrl} from '../../api/Baseurl'
 function Otpp() {
 
     const [user, setUser] = useState({ otp: "" })
+    const [disable, setDisable] = useState(false);
     let name, value;
     const handleInputs = (e) => {
         name = e.target.name;
@@ -62,11 +63,11 @@ function Otpp() {
             password : history.location.state.newpassword
         }
 
-        console.log(again);
+        setDisable(true);
         const configuration = {
 
             method: "POST",
-            url: (BaseUrl() + "api/user/forgot"),
+            url: BaseUrl() + "api/user/forgot",
             headers: {
                 "content-Type": "application/json"
             },
@@ -75,9 +76,13 @@ function Otpp() {
         }
         axios(configuration).then((res) => {
             console.log(res);
-            // alert("otp sent successfully");
+             alert("otp sent successfully");
             
         })
+
+        setTimeout(() => {
+            setDisable(false);
+        }, 10000);
     }
 
     return (
@@ -96,7 +101,7 @@ function Otpp() {
 
                             <div className="col-lg-2-1">
                                 <i className="fa fa-key icon"></i>
-                                <input type="text" name="otp" placeholder="OTP" value={user.otp} onChange={handleInputs} className="input1" size="30" required />
+                                <input type="text" name="otp" placeholder="OTP" value={user.otp} onChange={handleInputs} className="input1" size="30" />
                             </div>
                         </div>
 
@@ -111,7 +116,7 @@ function Otpp() {
                         <div className="form-row" id="gg">
 
                             <div className="col-lg-2">
-                                <button type="submit" className="btn5" onClick={handleClick}>Resend</button>
+                                <button type="submit" disabled={disable} className="btn5" onClick={handleClick}>Resend</button>
                             </div>
 
                         </div>

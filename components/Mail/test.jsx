@@ -127,7 +127,7 @@ function Send() {
                                 }
                                 onChange={handleChange}
                             />
-                            <label className="form-check-label ms-2">Mail Adresses</label>
+                            <label className="form-check-label ms-2"> Select All Mail Adresses</label>
                         </div>
                         {users.map((user) => (
                             <div className="form-check">
