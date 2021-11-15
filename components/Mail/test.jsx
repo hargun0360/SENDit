@@ -11,7 +11,7 @@ import {BaseUrl} from '../../api/Baseurl'
 
 function Send() {
 
-
+    let bearer = 'Bearer ' + localStorage.getItem('tokendata');
     const [users, setUsers] = useState([{ name: "" }]);
     let array = [];
     let arr = [];
@@ -25,7 +25,7 @@ function Send() {
     }, []);
 
     const load = async () => {
-        const res = await axios.get(BaseUrl() + "api/group/giveGroupName");
+        const res = await axios.get(BaseUrl() + "api/group/giveGroupName",{ headers: {Authorization : bearer} });
         console.log(res);
         //change the setusers array format to setUsers(users.name=element)
         // array=res.data;

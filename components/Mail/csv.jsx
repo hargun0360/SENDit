@@ -10,6 +10,7 @@ export function obj(gn){
 function CSV() {
     const [csvFile, setCsvFile] = useState();
     const [disable, setDisable] = useState(false);
+    let bearer = 'Bearer ' + localStorage.getItem('tokendata');
 
     const Submit = () => {
         const file = csvFile;
@@ -25,7 +26,8 @@ function CSV() {
                 method: "POST",
                 url: BaseUrl() + "api/group/addGroup",
                 headers: {
-                    "content-Type": "application/json"
+                    "content-Type": "application/json",
+                    Authorization: bearer
                 },
                 data: JSON.stringify(object)
             }

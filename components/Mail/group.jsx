@@ -9,6 +9,7 @@ function Group() {
     
     const [groupName, setgroupName] = useState("Group Name");
     const [text, setText] = useState("");
+    let bearer = 'Bearer ' + localStorage.getItem('tokendata');
 
     const handleInputs = (e) => {
         setText(e.target.value);
@@ -27,7 +28,8 @@ function Group() {
                         method: "POST",
                         url: BaseUrl() + "api/group/unique",
                         headers: {
-                            "content-Type": "application/json"
+                            "content-Type": "application/json",
+                            Authorization: bearer
                         },
                         params: {
                             groupName

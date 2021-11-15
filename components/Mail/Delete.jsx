@@ -9,6 +9,7 @@ function GroupD() {
     
     const [groupDelete, setgroupDelete] = useState("");
     const [text, setText] = useState("");
+    let bearer = 'Bearer ' + localStorage.getItem('tokendata');
 
     const handleInputs = (e) => {
         setText(e.target.value);
@@ -26,7 +27,8 @@ function GroupD() {
                         method: "DELETE",
                         url: BaseUrl() + "api/group/deleteGroup",
                         headers: {
-                            "content-Type": "application/json"
+                            "content-Type": "application/json",
+                            Authorization: bearer
                         },
                         params: {
                             groupDelete

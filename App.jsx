@@ -23,7 +23,7 @@ function App(){
     return(
         <div>
             <Switch>
-            <Route exact path="/Header" component={Homepage} />
+            <Route exact path="/" component={Homepage} />
             <Route exact path="/SignUp" component={Login} />
             <Route path="/SignIn" component={Sign} />
             <Route path="/Forgotpassword" component={Forgot} />
@@ -36,7 +36,7 @@ function App(){
             <Route path="/Mail" component={Mail} />
             <Route path="/GroupD" component={GroupD} />
             <Route path="/temp" component={Mailtemp} />
-            <Route path="/" component={Homenavbar} />
+            <Route path="/Header" component={Homenavbar} />
            
 
             

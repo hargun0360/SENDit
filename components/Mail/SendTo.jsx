@@ -5,14 +5,14 @@ import {BaseUrl} from '../../api/Baseurl'
 function Dropdown() {
     const [groups, setGroups] = useState([]);
 
-
+    let bearer = 'Bearer ' + localStorage.getItem('tokendata');
 
     useEffect(() => {
         loadUsers();
       }, []);
 
       const loadUsers = async () => {
-        const res = await axios.get(BaseUrl() + "api/group/getGroupNames");
+        const res = await axios.get(BaseUrl() + "api/group/getGroupNames",{ headers: {Authorization : bearer} });
         console.log(res);
         setGroups(res.data)
       }
@@ -32,7 +32,8 @@ function Dropdown() {
             method: "GET",
             url: BaseUrl() + "api/group/giveGroupName",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                Authorization: bearer
             },
             data:{
                 groupName
