@@ -238,3 +238,69 @@ text-decoration: none;
 	justify-content: space-between;
 	padding: 50px 5% 0px 5%;
 }
+.Footer{
+    background-color: #1995AF;
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1%;
+    flex-direction: column;
+    padding-bottom: 4%;
+}
+.Email-gen{
+    position: static;
+    line-height: 20px;
+    font-weight: 400;
+    font-size: 20px;
+}
+.Head2{
+    position: absolute;
+width: fit-content;
+height: 5%;
+text-align: center;
+
+font-family: sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 28px;
+margin-top: 7%;
+
+color: #FFFEFE;
+}
+.social-icons{
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    height:8%;
+    margin-top: 5%;
+    margin-left: -7%;
+}
+.facebook{
+        width: 100%;
+        height: 5%;
+        padding:0% 15% ;
+}
+.instagram{
+    width: 100%;
+    height: 2%;
+    padding:0% 15% ;
+}
+.twitter{
+    width: 100%;
+    height: 5%;
+    padding:0% 15% ;
+}
+.parag1{
+    
+    margin-left: 15%;
+}
+.parag2{
+    margin-left: 7%;
+}
+
+.parag3{
+    margin-left: 40%;
+}

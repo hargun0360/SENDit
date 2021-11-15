@@ -46,10 +46,9 @@ function Otp() {
             console.log(res);
             if (res.data === "You are registered successfully") {
                 alert("You are registered Successfully");
-                history.push("/Error");
+                history.push("/SignIn");
             } else if (res.data === "Entered Otp is NOT valid. Please Retry!") {
                 alert("Entered Otp is NOT valid. Please Retry!");
-                history.push("/OTP")
             }
 
         }).catch((error) => {
