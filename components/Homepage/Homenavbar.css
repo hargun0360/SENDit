@@ -13,7 +13,7 @@ li {
   .nav-grid1{
       background-color: #1995AF;
       display: grid;
-      grid-template-columns: 15% 15% 2fr 1% 15% 1%;
+      grid-template-columns: 15% 15% 2fr 4% 15% 1%;
       position: fixed;
 	left: 0;
 	top: 0;

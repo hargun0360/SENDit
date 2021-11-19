@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {BaseUrl} from '../../api/Baseurl'
+import Sending from '../Mail/send'
 function Dropdown() {
     const [groups, setGroups] = useState([]);
+    const [arr,setArr]= useState([]);
 
     let bearer = 'Bearer ' + localStorage.getItem('tokendata');
 
@@ -35,17 +37,17 @@ function Dropdown() {
                 "Content-Type": "application/json",
                 Authorization: bearer
             },
-            data:{
-                groupName
+            params:{
+                groupName:groupName
             }
         }
         console.log(config);
         axios(config).then((res) => {
-            console.log(res);
+            console.log(res.data);
+            setArr(res.data);
         });
 
         
-
         
     }
 
@@ -58,8 +60,8 @@ function Dropdown() {
 
                     <div className="col-6 col-lg-4 col-sm-5  col-md-4 col-xl-3">
                         <h3 className="mt-5 mb-3">Groups</h3>
-                        <select onChange={selectGroup}  name="groupName" className="form-control mt-3" >
-                            <option selected="true" disabled="disabled">Group List</option>
+                        <select onChange={selectGroup}  name="groupName" className="drop" >
+                            <option selected="true" disabled="disabled">My Groups</option>
                             {groups.map((group) => (
                                 <option value={group}>{group}</option>
                             ))}
@@ -67,12 +69,14 @@ function Dropdown() {
                     </div>
 
                 </div>
+    {console.log(arr)}
+            <Sending list={arr} />
             </div>
 
         </>
 
     );
-
+    
     
 
 }

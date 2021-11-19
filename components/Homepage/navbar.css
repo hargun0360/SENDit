@@ -14,7 +14,14 @@ li {
       background-color: #1995AF;
       display: grid;
       grid-template-columns: 15% 1fr 2fr 1%;
-      position: relative;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width:100%;
+      z-index: 1;
+      transition: 0.6s ease-in-out;
+      padding: 1%;
+      box-shadow: 2px 10px 30px rgba(0, 8, 8, 0.308)
     }
   .text{
       color: black;

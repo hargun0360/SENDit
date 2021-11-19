@@ -19,19 +19,19 @@ const Homenav = () => {
                 <div className="nav-icons">
                     <ul className="menu-box">
                         <li className="item">
-                            <NavLink to="/" className="text">Shedule Mail</NavLink>
+                            <NavLink to="/" className="text">Templates</NavLink>
                         </li>
                         <li className="item">
-                            <NavLink to="/about" className="text">Templates</NavLink>
+                            <NavLink to="/Manage" className="text">Manage Groups</NavLink>
                         </li>
                         <li className="item">
-                            <NavLink to="/test" className="text">Manage Groups</NavLink>
+                            <NavLink to="/Error" className="text">Premium</NavLink>
                         </li>
                         <li className="item">
-                            <NavLink to="/contact" className="text">Premium</NavLink>
-                        </li>
-                        <li className="item">
-                            <NavLink to="/contact" className="text">Profile</NavLink>
+                            <NavLink to="/data" className="text">LogOut</NavLink>
+                            
+                                
+                            
                         </li>
                     </ul>
                 </div>
