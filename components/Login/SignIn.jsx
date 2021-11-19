@@ -10,7 +10,7 @@ import {BaseUrl} from '../../api/Baseurl'
 
 function Sign(){
 
-    const [user,setUser] = useState({Name:"",email:"",password:""})
+    const [user,setUser] = useState({email:"",password:""})
     const history = useHistory();
     let name,value;
     const handleInputs=(e)=>{
@@ -52,24 +52,28 @@ function Sign(){
                 alert("Invalid credentials");
                 history.push("/SignIn");
             }
+            if(res.data==="You don't have any account please signUp first"){
+                alert("You don't have any account please signUp first");
+                history.push("/SignIn");
+            }
 
             }).catch(()=>{
             <Error />
         })
-        setUser({ ...user, Name: "", email: "", password: ""});
+        setUser({ ...user, email: "", password: ""});
     }
 
     }
     const Validate = (values)=>{
         const error={}
         const regexMail=/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/
-        const regexName=/^[A-Za-z. ]{3,30}$/;
+        // const regexName=/^[A-Za-z. ]{3,30}$/;
         const regexPass=/^[a-zA-Z0-9@#!$%^_]{8,}$/;
-        if(!values.Name){
-            error.Name="**Name Is Required!";
-        }else if(!regexName.test(values.Name)){
-            error.Name="**This is not a valid Name format!";
-        }
+        // if(!values.Name){
+        //     error.Name="**Name Is Required!";
+        // }else if(!regexName.test(values.Name)){
+        //     error.Name="**This is not a valid Name format!";
+        // }
         if(!values.email){
             error.email="**Email Is Required!";
         }else if(!regexMail.test(values.email)){
@@ -103,7 +107,7 @@ function Sign(){
                             
                          <form method="POST" onSubmit={submitForm}>
 
-                         <div className="form-row">
+                         {/* <div className="form-row">
 
                                 <div className="col-lg-2">
                                 <i className="fa fa-user icon"></i>
@@ -111,7 +115,7 @@ function Sign(){
                                 </div>
 
                              </div>
-                             <p className="required">{userError.Name}</p>
+                             <p className="required">{userError.Name}</p> */}
                              
                              <div className="form-row">
 
@@ -133,12 +137,6 @@ function Sign(){
                              </div>
                              <p className="required">{userError.password}</p>
 
-                             <div className="form-row">
-
-                            
-                                    <label className="lab"><input type="checkbox" name="check" id="checkbox" />Remember Me</label>
-                                    
-                                </div>
 
                              
 

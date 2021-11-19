@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios'
 import Homenav from '../Homepage/navbar'
-import {BaseUrl} from '../../api/Baseurl'
+import { BaseUrl } from '../../api/Baseurl'
+import { useHistory } from 'react-router-dom'
+
+import './Mailtemp.css'
 
 function Mailtemp() {
+    const history = useHistory();
+    let bearer = 'Bearer ' + localStorage.getItem('tokendata');
+
 
     const [mailFrom, setMailFrom] = useState('')
     const [name, setName] = useState('')
@@ -12,32 +18,31 @@ function Mailtemp() {
     const [headline, setHeadline] = useState('')
     const [description, setDescription] = useState('')
     const [loading, setLoading] = useState(false)
-
+    const [attachment, setAttachment] = useState('')
 
     const handleRequest = async (e) => {
         if (mailFrom && subject && name && tagline && headline !== "") {
             if (description !== "") {
                 e.preventDefault()
                 setLoading(true)
-                console.log({ name,
-                    mailFrom,
-                    subject,
-                    tagline,
-                    headline,
-                    description })
 
                 const body = {
                     name,
-                    mailFrom,
+                    to: history.location.state.mailTo,
+                    from: mailFrom,
                     subject,
-                    tagline,
+                    description,
                     headline,
-                    description
+                    tagline,
+                    attachment,
+                    value: history.location.state.value
                 }
+                console.log(body);
 
-                await axios.post(BaseUrl() + "", body, {
+                await axios.post(BaseUrl() + "api/template", body, {
                     headers: {
-                        'Content-type': 'application/json'
+                        'Content-type': 'application/json',
+                        Authorization: bearer
                     }
                 }).then((res) => {
                     alert('Email Sent Successfully')
@@ -62,88 +67,107 @@ function Mailtemp() {
     return (
         <>
             <Homenav />
-            <div className="Mail-box">
-            <div className="Mail-box">
-            <div className="Box2">
-                <form onSubmit={handleRequest} method="post">
-                    <div className="form">
-                        <div className="form-title">
-                            <h4>{loading ? 'Sending...' : "Send Email"}</h4>
+
+            <div className="Mail-box1">
+
+                <div className="Box3">
+                    <form onSubmit={handleRequest} method="post">
+                        <div className="form">
+                            <div style={{ paddingTop: "3%", textAlign: "center" }} className="form-title">
+                                <h4>{loading ? 'Sending...' : "Send Email"}</h4>
+                            </div>
+                            <div style={{ padding: "3%", paddingLeft: "6%" }} className="form-container">
+                                <div style={{ padding: "1%", paddingLeft: "6%" }} className="name-mail">
+                                    <label style={{ padding: "1%", paddingLeft: "9%" }}>Name</label>
+                                    <input style={{ textAlign: "center",padding:"1% 0%" }}
+                                        id="message"
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        type="text"
+                                        size="40"
+                                        placeholder="Enter Your Name" />
+                                </div>
+                                <div style={{ padding: "1%", paddingLeft: "6%" }} className="From">
+                                    <label style={{ padding: "1%", paddingLeft: "10%" }}>From</label>
+                                    <input style={{ textAlign: "center",padding:"1% 0%" }}
+                                        type="email"
+                                        id="mailFrom"
+                                        value={mailFrom}
+                                        required
+                                        size="40"
+                                        onChange={(e) => setMailFrom(e.target.value)}
+                                        placeholder="Enter Your Email" />
+                                </div>
+                                <div style={{ padding: "1%", paddingLeft: "6%" }} className="Attachment">
+                                    <label style={{ padding: "1%", paddingLeft: "3%" }}>Attachment</label>
+                                    <input style={{ textAlign: "center",padding:"1% 0%" }}
+                                        type="text"
+                                        id="attachment"
+                                        value={attachment}
+                                        size="40"
+                                        onChange={(e) => setAttachment(e.target.value)}
+                                        placeholder="Add Attachment" />
+                                </div>
+
+                                <div style={{ padding: "1%", paddingLeft: "6%" }} className="Subject">
+                                    <label style={{ padding: "1%", paddingLeft: "8%" }}>Subject</label>
+                                    <input style={{ textAlign: "center",padding:"1% 0%" }}
+                                        id="subject1"
+                                        value={subject}
+                                        onChange={(e) => setSubject(e.target.value)}
+                                        required
+                                        size="40"
+                                        type="text"
+                                        placeholder="Add Subject" />
+                                </div>
+
+                                <div style={{ padding: "1%", paddingLeft: "6%" }} className="tagline-mail">
+                                    <label style={{ padding: "1%", paddingLeft: "8%" }}>Tagline</label>
+                                    <input style={{ textAlign: "center",padding:"1% 0%" }}
+                                        id="tagline"
+                                        value={tagline}
+                                        onChange={(e) => setTagline(e.target.value)}
+                                        type="text"
+                                        size="40"
+                                        placeholder="Enter the tagline" />
+                                </div>
+
+                                <div style={{ padding: "1%", paddingLeft: "6%" }} className="headline-mail">
+                                    <label style={{ padding: "1%", paddingLeft: "6%" }}>Headline</label>
+                                    <input style={{ textAlign: "center",padding:"1% 0%" }}
+                                        id="message"
+                                        value={headline}
+                                        onChange={(e) => setHeadline(e.target.value)}
+                                        type="text"
+                                        size="40"
+                                        placeholder="Enter the headline" />
+                                </div>
+
+                                <div style={{ padding: "1%", paddingLeft: "6%" }} className="description-mail">
+                                    <label style={{ padding: "1%", paddingLeft: "0%" }}>Compose Mail</label>
+                                    <textarea
+                                        className="message1"
+                                        value={description}
+                                        onChange={(e) => setDescription(e.target.value)}
+                                        type="text"
+                                        placeholder="Enter Content from here..."
+                                        rows="10"
+                                        cols="70" />
+
+                                </div>
+
+                                <button
+                                    disabled={loading}
+                                    onClick={handleRequest}
+                                    type="submit"
+                                    className="btn btn-success" id="send-btn">Send</button>
+
+                            </div>
                         </div>
-                        <div className="form-container">
-                            <div className="name-mail">
-                                <label>Name</label>
-                                <input
-                                    id="message"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    type="text"
-                                    placeholder="Enter Your Name" />
-                            </div>
-                            <div className="From">
-                                <label>From</label>
-                                <input
-                                    type="email"
-                                    id="mailFrom"
-                                    value={mailFrom}
-                                    required
-                                    onChange={(e) => setMailFrom(e.target.value)}
-                                    placeholder="Enter Your Email" />
-                            </div>
-
-                            <div className="Subject">
-                                <label>Subject</label>
-                                <input
-                                    id="subject"
-                                    value={subject}
-                                    onChange={(e) => setSubject(e.target.value)}
-                                    required
-                                    type="text"
-                                    placeholder="Add Subject" />
-                            </div>
-
-                            <div className="tagline-mail">
-                                <label>Tagline</label>
-                                <input
-                                    id="tagline"
-                                    value={tagline}
-                                    onChange={(e) => setTagline(e.target.value)}
-                                    type="text"
-                                    placeholder="Enter the tagline" />
-                            </div>
-
-                            <div className="headline-mail">
-                                <label>Headline</label>
-                                <input
-                                    id="message"
-                                    value={headline}
-                                    onChange={(e) => setHeadline(e.target.value)}
-                                    type="text"
-                                    placeholder="Enter the headline" />
-                            </div>
-
-                            <div className="description-mail">
-                                <label>Compose Mail</label>
-                                <input
-                                    id="message"
-                                    value={description}
-                                    onChange={(e) => setDescription(e.target.value)}
-                                    type="text"
-                                    placeholder="Enter Content from here..." />
-                            </div>
-
-                            <button
-                                disabled={loading}
-                                onClick={handleRequest}
-                                type="submit"
-                                className="btn btn-success">Send</button>
-
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-            </div>
-            </div>
+
         </>
     );
 }

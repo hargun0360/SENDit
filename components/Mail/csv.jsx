@@ -6,11 +6,23 @@ let groupNamee
 export function obj(gn){
     groupNamee=gn;
 }
+// export function fun(tex){
+//     yo=tex;
+//     console.log(yo);
+// }
+
+
 
 function CSV() {
+
+
     const [csvFile, setCsvFile] = useState();
-    const [disable, setDisable] = useState(false);
+    // const [disable, setDisable] = useState(true);
     let bearer = 'Bearer ' + localStorage.getItem('tokendata');
+    
+   
+    
+    //  console.log(props.txt);
 
     const Submit = () => {
         const file = csvFile;
@@ -18,6 +30,7 @@ function CSV() {
         reader.onload = function (e) {
             const text = e.target.result;
             const mailAddresses = text;
+            
             let object={
                 groupName:groupNamee,
                 mailAddresses:mailAddresses
@@ -32,26 +45,33 @@ function CSV() {
                 data: JSON.stringify(object)
             }
              axios(config).then((res)=>{
-                setDisable(false);
-                console.log(res);
+                if(res.data==="Added the group successfully"){
+                    alert("Added the group successfully");
+                }
             })
             console.log(object);
         }
         reader.readAsText(file);
     }
+    
+    
+    
+    
+   
+    
+    
+    
 
-    return (
-        <>
-                <h3>Choose File</h3>
-                <input type="file" accept=".csv" id="csvFile" onChange={(e) => { setCsvFile(e.target.files[0]) }} />
-                <button disabled={disable} className="btn btn-success" style={{display:"block"}} onClick={(e) => {
+    return (<>
+                <input type="file" accept=".csv"  id="csvFile" onChange={(e) => { setCsvFile(e.target.files[0]) }} />
+                <button  className="Csv-button" style={{display:"block"}} onClick={(e) => {
                     
                     if (csvFile) {
                         Submit();
-                        setDisable(true);
+                        
                         
                     }
-                }}>Submit File</button>
+                }}>Upload</button>
 
         </>
 );

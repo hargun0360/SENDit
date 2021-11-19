@@ -3,13 +3,17 @@ import Homenavbar from './Homenavbar'
 import './header.css'
 import { Link } from 'react-router-dom';
 import Features from './Features';
+import Homenav from './navbar';
 
 
 function Header() {
     return (
         <>
             <div id="main-Page">
-                <Homenavbar />
+            {
+                localStorage.getItem('tokendata')?<Homenav /> :  <Homenavbar />
+            }
+               
                 <div className="name">
                     <h1>Keep Sending Mails....</h1>
 
