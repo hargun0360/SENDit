@@ -21,13 +21,13 @@ const Homenavbar = () => {
                     <ul className="menu-box1">
                     
                         <li className="item1">
-                            <NavLink to="/" className="text">Templates</NavLink>
+                            <NavLink to="/"  className="text">Templates</NavLink>
                         </li>
                         <li className="item1">
-                            <NavLink to="/Manage" className="text">Manage Groups</NavLink>
+                            <NavLink to="/Manage" activeClassName="activeLink" className="text">Manage Groups</NavLink>
                         </li>
                         <li className="item1">
-                            <NavLink to="/Error" className="text">Premium</NavLink>
+                            <NavLink to="/Error" activeClassName="activeLink" className="text">Premium</NavLink>
                         </li>
                     </ul>
                 </div>

@@ -17,6 +17,7 @@ function Sending(props) {
             
     
     let list=[];
+    let uniq
     
     
     const history = useHistory();
@@ -89,6 +90,8 @@ function Sending(props) {
 
     }
     console.log(arr);
+     uniq = [...new Set(arr)];
+    
     
 
     const handleFinalSub = () => {
@@ -106,14 +109,14 @@ function Sending(props) {
       axios(config).then((res) => {
           console.log(res.data);
 
-
+          console.log(uniq);
           history.push({
             pathname : "/Mail",
-            state : {mailTo:arr,bool:res.data}
+            state : {mailTo:uniq,bool:res.data}
         });
           
       });
-        console.log(arr);
+        
         
          
   

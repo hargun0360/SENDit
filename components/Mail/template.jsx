@@ -145,7 +145,7 @@ function Mailtemp() {
                                 </div>
 
                                 <div style={{ padding: "1%", paddingLeft: "6%" }} className="description-mail">
-                                    <label style={{ padding: "1%", paddingLeft: "0%" }}>Compose Mail</label>
+                                    <label  className="tyu">Compose Mail</label>
                                     <textarea
                                         className="message1"
                                         value={description}

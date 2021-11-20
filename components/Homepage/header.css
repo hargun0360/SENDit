@@ -304,3 +304,14 @@ color: #FFFEFE;
 .parag3{
     margin-left: 40%;
 }
+
+.activeLink {
+    
+    background-color: rgb(248, 78, 11);
+    border-radius: 10px;
+    transition: all 0.2s ease-out;
+    color: white;
+    box-shadow: 1px 1px 3px 3px rgba(7, 2, 0, 0.287);
+    padding: 5px;
+    
+ }
