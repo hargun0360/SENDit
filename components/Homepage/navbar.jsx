@@ -19,13 +19,13 @@ const Homenav = () => {
                 <div className="nav-icons">
                     <ul className="menu-box">
                         <li className="item">
-                            <NavLink to="/" className="text">Templates</NavLink>
+                            <NavLink to="/"  className="text">Templates</NavLink>
                         </li>
                         <li className="item">
-                            <NavLink to="/Manage" className="text">Manage Groups</NavLink>
+                            <NavLink to="/Manage" activeClassName="activeLink" className="text">Manage Groups</NavLink>
                         </li>
                         <li className="item">
-                            <NavLink to="/Error" className="text">Premium</NavLink>
+                            <NavLink to="/Error" activeClassName="activeLink" className="text">Premium</NavLink>
                         </li>
                         <li className="item">
                             <NavLink to="/data" className="text">LogOut</NavLink>

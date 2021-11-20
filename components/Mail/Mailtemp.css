@@ -148,3 +148,22 @@
         padding: 1% 4%;
     }
 
+    .tyu{
+         padding: 1%;
+         padding-left: 0%;
+    }
+@media (min-width:1350px)and (max-width:1400px){
+
+    .tyu{
+        padding: 1% 6% 1% 0%;
+    }
+
+}
+@media (min-width:1401px){
+
+    .tyu{
+        padding: 1% 20% 1% 0%;
+    }
+
+}
+    
