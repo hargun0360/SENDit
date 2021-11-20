@@ -124,8 +124,8 @@ function Sending(props) {
         return (
             <>
           
-            <form className="To" onSubmit={Submit}>
-              <h3>List Of Mail MailAddresses</h3>
+            <form className="To" style={{marginLeft:"-10%"}} onSubmit={Submit}>
+              <h3 style={{width:"130%",marginTop:"40%"}}>All MailAddresses</h3>
               <div className="form-check">
                 <input
                   type="checkbox"
@@ -154,7 +154,7 @@ function Sending(props) {
               <button type="submit" className="btn btn-primary">Add</button>
             </form>
           
-                    <div className="button-final">
+                    <div className="button-final" style={{marginTop:"50%"}}>
           
                     <button type="submit" className="btn btn-success" id="Final-btn" onClick={handleFinalSub}>Final Submission</button>
                     </div>

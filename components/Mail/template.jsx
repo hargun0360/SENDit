@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios'
 import Homenav from '../Homepage/navbar'
 import { BaseUrl } from '../../api/Baseurl'
@@ -7,7 +7,9 @@ import { useHistory } from 'react-router-dom'
 import './Mailtemp.css'
 
 function Mailtemp() {
+    
     const history = useHistory();
+    
     let bearer = 'Bearer ' + localStorage.getItem('tokendata');
 
 
@@ -18,7 +20,7 @@ function Mailtemp() {
     const [headline, setHeadline] = useState('')
     const [description, setDescription] = useState('')
     const [loading, setLoading] = useState(false)
-    const [attachment, setAttachment] = useState('')
+    // const [attachment, setAttachment] = useState('')
 
     const handleRequest = async (e) => {
         if (mailFrom && subject && name && tagline && headline !== "") {
@@ -34,7 +36,6 @@ function Mailtemp() {
                     description,
                     headline,
                     tagline,
-                    attachment,
                     value: history.location.state.value
                 }
                 console.log(body);
@@ -98,7 +99,7 @@ function Mailtemp() {
                                         onChange={(e) => setMailFrom(e.target.value)}
                                         placeholder="Enter Your Email" />
                                 </div>
-                                <div style={{ padding: "1%", paddingLeft: "6%" }} className="Attachment">
+                                {/* <div style={{ padding: "1%", paddingLeft: "6%" }} className="Attachment">
                                     <label style={{ padding: "1%", paddingLeft: "3%" }}>Attachment</label>
                                     <input style={{ textAlign: "center",padding:"1% 0%" }}
                                         type="text"
@@ -107,7 +108,7 @@ function Mailtemp() {
                                         size="40"
                                         onChange={(e) => setAttachment(e.target.value)}
                                         placeholder="Add Attachment" />
-                                </div>
+                                </div> */}
 
                                 <div style={{ padding: "1%", paddingLeft: "6%" }} className="Subject">
                                     <label style={{ padding: "1%", paddingLeft: "8%" }}>Subject</label>

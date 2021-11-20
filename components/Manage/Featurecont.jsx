@@ -19,7 +19,9 @@ function Featurecont() {
             <div className="div-cont">
                 <CSV />
             </div>
-            
+            <div className="div-cont4">
+                <GroupD />
+            </div>
 
 
         </div>
@@ -28,12 +30,10 @@ function Featurecont() {
         <div className="div-cont3">
                 <Dropdown />
             </div>
-            <div className="div-cont4">
-                <GroupD />
-            </div>
+            
             
         </div>
-
+        
         
 
         </div>

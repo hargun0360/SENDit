@@ -45,7 +45,7 @@ function Otpp() {
             console.log(res);
             if(res.data === "Changed the password successfully"){
                 alert("Changed the password Successfully");
-                history.push("/Error");
+                history.push("/SignIn");
             }else if(res.data === "Entered Otp is NOT valid. Please Retry!"){
                 alert("Entered Otp is NOT valid. Please Retry!");
                 history.push("/Forgotpassword");

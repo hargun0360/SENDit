@@ -5,6 +5,7 @@ import axios from 'axios';
 
 
 function Error(){
+    
     let bearer = 'Bearer ' + localStorage.getItem('tokendata');
     const config = {
         method: "GET",

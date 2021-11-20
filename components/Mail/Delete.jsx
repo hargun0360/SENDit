@@ -36,15 +36,18 @@ function GroupD() {
                 }
                 console.log(configuration);
                 axios(configuration).then((res) => {
+                    console.log(res.data);
                     if (res.data === "Please enter a group Name to delete") {
                         alert("Please enter a group Name to delete");
-                        if (res.data === "Please choose valid group name") {
-                            alert("Please choose valid group name");
-                            if (res.data === "Removed the group successfully") {
+                    }
+                        if (res.data === "Removed the group successfully") {
                                 alert("Removed the group successfully");
                             }
+                            if (res.data === "Please choose valid group name") {
+                            alert("Please choose valid group name");
+                            
                         }
-                    }
+                    
 
                 });
                 // let groupn=text;
