@@ -9,7 +9,6 @@ import Otp from './components/otp/Otpscreen'
 import Otpp from './components/otp/Helper'
 import CSV from './components/Mail/csv'
 import Fileread from './components/Mail/group'
-// import Send from './components/Mail/test'
 import Dropdown from './components/Mail/SendTo'
 import Mail from './components/Mail/Mailbox'
 import GroupD from './components/Mail/Delete'
@@ -18,6 +17,8 @@ import Homenavbar from './components/Homepage/Homenavbar'
 import Homepage from './components/Homepage/Homepage'
 import ManageHome from './components/Manage/Managehome'
 import Logout from './components/Homepage/Data'
+// import Protected from './Protected'
+
 
 
 function App(){
@@ -32,7 +33,6 @@ function App(){
             <Route path="/OTP" component={Otp} />
             <Route path="/OTPP" component={Otpp} />
             <Route path="/CSV" component={CSV} />
-            {/* <Route path="/test" component={Send} /> */}
             <Route path="/Fileread" component={Fileread} />
             <Route path="/Drop" component={Dropdown} />
             <Route path="/Mail" component={Mail} />

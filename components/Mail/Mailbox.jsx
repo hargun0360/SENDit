@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios'
 import Homenav from '../Homepage/navbar'
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -12,13 +12,16 @@ import imag4 from '../../Images/temp4.png'
 
 function Mail() {
 
+  const history = useHistory();
+    
+
   const [from, setFrom] = useState('')
   const [message, setMessage] = useState('')
   const [subject, setSubject] = useState('')
   const [loading, setLoading] = useState(false)
  
   let bearer = 'Bearer ' + localStorage.getItem('tokendata');
-  const history = useHistory();
+  
   const object = [{
     value: 1,
     mailTo: history.location.state.mailTo
@@ -37,7 +40,6 @@ function Mail() {
 
   }]
 
-  // const [disable,setDisable] = useState(true)
 
 
   const handleRequest = async (e) => {
@@ -83,47 +85,7 @@ function Mail() {
     }
 
   }
-  // const handleClickOne = (e) => {
-
-  //   e.preventDefault();
-
-
-
-    // const handleRequest=(e,x)=>{
-
-
-
-
-    // }
-    //   const handleInputs=(e)=>{
-
-    //     e.preventDefault();
-    //     let object = {
-
-    //       mailTo: history.location.state.mailTo,
-    //       value:3
-    //     }
-
-    //     history.push({
-    //         pathname : "/temp",
-    //         state : object
-    //     });
-    //   }
-
-    //     const handleChange=(e)=>{
-
-    //       e.preventDefault();
-    //       let object = {
-
-    //         mailTo: history.location.state.mailTo,
-    //         value:4
-    //       }
-
-    //       history.push({
-    //           pathname : "/temp",
-    //           state : object
-    //       });
-    //    }
+  
     let x=history.location.state.bool;
    
 

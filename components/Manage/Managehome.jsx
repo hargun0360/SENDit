@@ -1,17 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios';
+import React from 'react'
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import Homenav from '../Homepage/navbar'
-// import CSV from './csv'
-// import Group from './group'
-// import Dropdown from './SendTo'
-// import GroupD from './Delete'
-// import {BaseUrl} from '../../api/Baseurl'
 import './groups.css'
 import Footer from '../Homepage/Footer';
 import Featurecont from './Featurecont';
 
 function ManageHome(){
+    
     return(<>
     
     <div id="main-Page">
