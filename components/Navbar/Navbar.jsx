@@ -4,6 +4,7 @@ import './Navbar.css'
 
 const style = {
     color: 'white'
+    
 };
 
 function Navbar(props) {
@@ -33,7 +34,7 @@ function Navbar(props) {
                     <li className="navbutton">
 
                         {isname ? <Link to="/SignIn">
-                            <button type="button" className="btn3" onClick={handleClick}><span style={style}>{props.name}</span></button>
+                            <button type="button" className="btn3" onClick={handleClick}><div style={style}>{props.name}</div></button>
                         </Link> : <Link to="/SignUp">
                             <button type="button" className="btn3" onClick={handleClick}><span style={style}>{props.name}</span></button>
                         </Link>}

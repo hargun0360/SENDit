@@ -1,5 +1,5 @@
 import React from "react";
-import CSV from '../Mail/csv'
+// import CSV from '../Mail/csv'
 import Group from '../Mail/group'
 import Dropdown from '../Mail/SendTo'
 import GroupD from '../Mail/Delete'
@@ -16,9 +16,7 @@ function Featurecont() {
         <div className="div-cont2">
                 <Group />
             </div>
-            <div className="div-cont">
-                <CSV />
-            </div>
+            
             <div className="div-cont4">
                 <GroupD />
             </div>
