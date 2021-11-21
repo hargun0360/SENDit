@@ -16,6 +16,8 @@ function Login() {
         setUser({ ...user, [name]: value });
     }
 
+    localStorage.setItem("dummy","protected");
+
     const [allEntry, setallEntery] = useState([]);
     const history = useHistory();
     const [userError,setUserError]=useState({});

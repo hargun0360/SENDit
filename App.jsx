@@ -7,17 +7,19 @@ import Forgot from './components/Forgotpassword/Forgotpass'
 import Error from './components/Error/Error'
 import Otp from './components/otp/Otpscreen'
 import Otpp from './components/otp/Helper'
-import CSV from './components/Mail/csv'
-import Fileread from './components/Mail/group'
-import Dropdown from './components/Mail/SendTo'
+// import CSV from './components/Mail/csv'
+// import Fileread from './components/Mail/group'
+// import Dropdown from './components/Mail/SendTo'
 import Mail from './components/Mail/Mailbox'
-import GroupD from './components/Mail/Delete'
+// import GroupD from './components/Mail/Delete'
 import Mailtemp from './components/Mail/template'
 import Homenavbar from './components/Homepage/Homenavbar'
 import Homepage from './components/Homepage/Homepage'
 import ManageHome from './components/Manage/Managehome'
 import Logout from './components/Homepage/Data'
-// import Protected from './Protected'
+ import PrivateRoute from '../src/components/PrivateRoutes'
+ import NotFound from '../src/components/NotFound';
+ 
 
 
 
@@ -32,21 +34,46 @@ function App(){
             <Route path="/Forgotpassword" component={Forgot} />
             <Route path="/OTP" component={Otp} />
             <Route path="/OTPP" component={Otpp} />
-            <Route path="/CSV" component={CSV} />
-            <Route path="/Fileread" component={Fileread} />
-            <Route path="/Drop" component={Dropdown} />
-            <Route path="/Mail" component={Mail} />
-            <Route path="/GroupD" component={GroupD} />
-            <Route path="/temp" component={Mailtemp} />
-            <Route path="/Header" component={Homenavbar} />
+            {/* <Route  exact path="/Error" component={Error} /> */}
+            
+            
+        
+            <PrivateRoute exact path='/Mail'>
+              <Mail />
+            </PrivateRoute>
+            <PrivateRoute exact path='/temp'>
+              <Mailtemp />
+            </PrivateRoute>
+            <Route exact path='/Header'>
+              <Homenavbar />
+            </Route>
+            <PrivateRoute exact path='/Manage'>
+              <ManageHome />
+            </PrivateRoute>
+            <PrivateRoute exact path='/Error'>
+              <Error />
+            </PrivateRoute>
+            <Route exact path='/Logout'>
+              <Logout />
+            </Route>
+            
+
+            <Route path="*">
+              <NotFound/>
+            </Route>
+            
+            
+            
+            
+            {/* <Route path="/Header" component={Homenavbar} />
             <Route path="/Manage" component={ManageHome} />
-            <Route path="/Data" component={Logout} />
+            <Route path="/Data" component={Logout} /> */}
 
            
 
             
             
-            <Route path="/Error" component={Error} />
+           
             
 
             </Switch>

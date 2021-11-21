@@ -10,14 +10,21 @@ function Dropdown() {
     let bearer = 'Bearer ' + localStorage.getItem('tokendata');
 
     useEffect(() => {
-        loadUsers();
+        // loadUsers();
+        API();
+        async function API() {
+            const res = await axios.get(BaseUrl() + "api/group/getGroupNames",{ headers: {Authorization : bearer} });
+            console.log(res);
+            setGroups(res.data)
+          }
+        //   API();
       }, []);
-
-      const loadUsers = async () => {
-        const res = await axios.get(BaseUrl() + "api/group/getGroupNames",{ headers: {Authorization : bearer} });
-        console.log(res);
-        setGroups(res.data)
-      }
+//dependency groups
+    //   const loadUsers = async () => {
+    //     const res = await axios.get(BaseUrl() + "api/group/getGroupNames",{ headers: {Authorization : bearer} });
+    //     console.log(res);
+    //     setGroups(res.data)
+    //   }
 
     console.log(groups);
 
