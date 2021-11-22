@@ -22,7 +22,7 @@ function GroupD() {
                 e.preventDefault()
                 // setgroupDelete(text)
                 // console.log(groupDelete);
-
+                
                 const configuration = {
                     method: "DELETE",
                     url: BaseUrl() + "api/group/deleteGroup",

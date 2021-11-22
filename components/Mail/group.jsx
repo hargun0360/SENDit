@@ -24,13 +24,14 @@ function Group() {
         setText(e.target.value);
     }
 
+    console.log(text);
     const Submit = () => {
         const file = csvFile;
         const reader = new FileReader();
         reader.onload = function (e) {
             const text = e.target.result;
             const mailAddresses = text;
-
+            console.log(mailAddresses);
             let object = {
                 groupName: group,
                 mailAddresses: mailAddresses
@@ -47,6 +48,7 @@ function Group() {
             axios(config).then((res) => {
                 if (res.data === "Added the group successfully") {
                     alert("Added the group successfully");
+                    setDisable(true);
                 }
             })
             console.log(object);
