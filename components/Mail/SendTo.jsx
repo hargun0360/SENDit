@@ -14,11 +14,11 @@ function Dropdown() {
         API();
         async function API() {
             const res = await axios.get(BaseUrl() + "api/group/getGroupNames",{ headers: {Authorization : bearer} });
-            console.log(res);
+
             setGroups(res.data)
           }
         //   API();
-      }, []);
+      });
 //dependency groups
     //   const loadUsers = async () => {
     //     const res = await axios.get(BaseUrl() + "api/group/getGroupNames",{ headers: {Authorization : bearer} });
@@ -26,12 +26,12 @@ function Dropdown() {
     //     setGroups(res.data)
     //   }
 
-    console.log(groups);
+    // console.log(groups);
 
     const selectGroup = (e) => {
 
         let groupName = e.target.value;
-        console.log(groupName);
+        // console.log(groupName);
         
             
         
@@ -48,9 +48,8 @@ function Dropdown() {
                 groupName:groupName
             }
         }
-        console.log(config);
+        
         axios(config).then((res) => {
-            console.log(res.data);
             setArr(res.data);
         });
 
@@ -76,7 +75,7 @@ function Dropdown() {
                     </div>
 
                 </div>
-    {console.log(arr)}
+    {/* {console.log(arr)} */}
             <Sending list={arr} />
             </div>
 

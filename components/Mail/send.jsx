@@ -63,7 +63,7 @@ function Sending(props) {
             }
         }
 
-        console.log(array);
+        // console.log(array);
         
 
         for (let j = 0;j<array.length ; j++) {
@@ -71,11 +71,11 @@ function Sending(props) {
           
       }
       // c=arr.length;
-      console.log(c);
-      console.log(arr.length);
+      // console.log(c);
+      // console.log(arr.length);
         
       
-      console.log(arr);
+      // console.log(arr);
       // console.log(arr);
      
 
@@ -89,14 +89,18 @@ function Sending(props) {
         
 
     }
-    console.log(arr);
+    // console.log(arr);
      uniq = [...new Set(arr)];
     
     
 
     const handleFinalSub = () => {
-        //unique value of an array in arr
-        // arr = [...new Set(array)];
+
+      if(uniq.length===0){
+        alert("Please Choose the MailAddress");
+      }
+      else{
+
         const config = {
           method: "GET",
           url: BaseUrl() + "api/checkPremium",
@@ -107,19 +111,18 @@ function Sending(props) {
       }
       
       axios(config).then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
 
-          console.log(uniq);
+          // console.log(uniq);
           history.push({
             pathname : "/Mail",
             state : {mailTo:uniq,bool:res.data}
         });
           
       });
+
+      }
         
-        
-         
-  
     }
 
 

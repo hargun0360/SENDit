@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import Homenav from '../Homepage/navbar'
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -13,15 +13,24 @@ import imag4 from '../../Images/temp4.png'
 function Mail() {
 
   const history = useHistory();
-    
+
 
   const [from, setFrom] = useState('')
   const [message, setMessage] = useState('')
   const [subject, setSubject] = useState('')
   const [loading, setLoading] = useState(false)
- 
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [userError,setUserError]=useState({});
+  const [isSubmit,setIsSubmit] = useState(false);
+
+  const user={
+    from,
+    message,
+    subject
+  }
+
   let bearer = 'Bearer ' + localStorage.getItem('tokendata');
-  
+
   const object = [{
     value: 1,
     mailTo: history.location.state.mailTo
@@ -41,18 +50,56 @@ function Mail() {
   }]
 
 
+  const Validate = (values)=>{
+    const error={}
+    const regexMail=/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/
+    
+    if(!values.from){
+        error.from="**Email Is Required!";
+    }else if(!regexMail.test(values.email)){
+        error.from="**This is not a valid Email format!";
+    }
+    if(message===""){
+      error.message="**Content is required!";
+    }
+    if(subject===""){
+      error.subject="**Subject is required!";
+    }
+    return error;
+
+}
+
+
 
   const handleRequest = async (e) => {
-    if (from && subject !== "") {
-      if (message !== "") {
+    
         e.preventDefault()
+        setUserError(Validate(user));
         setLoading(true)
-        console.log({ from, message, subject })
+        setIsSubmit(true);
+        if(Object.keys(userError).length===0 && isSubmit){
+
+          console.log({ from, message, subject })
+        const formData = new FormData();
+        // formData.append("name", name);
+        formData.append("uploadFile", selectedFile);
+        formData.append("uploadFile", selectedFile);
+        formData.append("uploadFile", selectedFile);
+        formData.append("uploadFile", selectedFile);
+        formData.append("uploadFile", selectedFile);
+        formData.append("uploadFile", selectedFile);
+
+    //     public String mailFrom;
+    // public String[] mailTo;
+    // public String subject;
+    // public String content;
+    // private MultipartFile file;
 
         const body = {
           mailFrom: from,
           mailTo: history.location.state.mailTo,
           subject,
+          formData,
 
           content: message
         }
@@ -63,7 +110,8 @@ function Mail() {
         await axios.post(BaseUrl() + "api/mail", body, {
           headers: {
             // "Cache-Control": "no-cache",
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
+            // "Content-Type": ,
             Authorization: bearer
             // "Accept-Language": "en",
             // "Access-Control-Allow-Origin": "*",
@@ -76,18 +124,14 @@ function Mail() {
           console.log(err)
           setLoading(false)
         })
-      } else {
-        alert('Compose Email')
-      }
 
-    } else {
-      alert('Please fill all required filled')
-    }
+        }
+        
 
   }
-  
-    let x=history.location.state.bool;
-   
+
+  let x = history.location.state.bool;
+
 
   return (
     <>
@@ -130,7 +174,7 @@ function Mail() {
               <img className="ig" src={imag3} />
             </div>
             <div className="Linking2">
-              <button type="submit" id="three" disabled={x?false:true} className="button8" onClick={(e) => {
+              <button type="submit" id="three" disabled={x ? false : true} className="button8" onClick={(e) => {
                 e.preventDefault();
                 history.push({
                   pathname: "/temp",
@@ -145,7 +189,7 @@ function Mail() {
               <img className="ig" src={imag4} />
             </div>
             <div className="Linking2">
-              <button type="submit" id="4" disabled={x?false:true} className="button8" onClick={(e) => {
+              <button type="submit" id="4" disabled={x ? false : true} className="button8" onClick={(e) => {
                 e.preventDefault();
                 history.push({
                   pathname: "/temp",
@@ -175,6 +219,22 @@ function Mail() {
                       onChange={(e) => setFrom(e.target.value)}
                       placeholder="Enter Your Email" />
                   </div>
+                  <p className="required">{userError.from}</p>
+
+                  <div style={{ padding: "1%", paddingLeft: "6%" }} className="Attachment">
+                    <label style={{ padding: "1%", paddingLeft: "3%" }}>Attachment</label>
+                    <input style={{ textAlign: "center", padding: "1% 0%" }}
+                      type="file"
+                      value={selectedFile}
+                      onChange={(e) => {
+                        e.preventDefault();
+
+                        setSelectedFile(e.target.files[0])
+
+                      } }
+
+                    />
+                  </div>
 
                   <div className="Subject">
                     <label className="Mail-label">Subject:</label>
@@ -187,6 +247,7 @@ function Mail() {
                       size="75"
                       placeholder="Add Subject" />
                   </div>
+                  <p className="required">{userError.subject}</p>
                 </div>
                 <div className="Compose-mail">
                   <label className="Mail-label">Compose Mail:</label>
@@ -199,6 +260,7 @@ function Mail() {
                     rows="10"
                     cols="90" />
                 </div>
+                <p className="required">{userError.message}</p>
 
                 <button
                   style={{ padding: "1% 3%" }}
