@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import axios from 'axios'
 import Homenav from '../Homepage/navbar'
 import { BaseUrl } from '../../api/Baseurl'
@@ -21,33 +21,84 @@ function Mailtemp() {
     const [description, setDescription] = useState('')
     const [loading, setLoading] = useState(false)
     const [selectedFile, setSelectedFile] = useState(null);
+    const [isSubmit,setIsSubmit] = useState(false);
+    const [userError,setUserError]=useState({});
     // const [attachment, setAttachment] = useState('')
+    const user={
+        mailFrom,
+        name,
+        subject,
+        tagline,
+        headline,
+        description
+      }
+
+
+      const Validate = (values)=>{
+        const error={}
+        const regexMail=/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z0-9]$/
+        const regexName=/^[A-Za-z. ]{3,30}$/;
+        if(!values.name){
+            error.name="**Name Is Required!";
+        }else if(!regexName.test(values.name)){
+            error.name="**This is not a valid Name format!";
+        }
+        if(!values.mailFrom){
+            error.mailFrom="**Email Is Required!";
+        }else if(!regexMail.test(values.mailFrom)){
+            error.mailFrom="**This is not a valid Email format!";
+        }
+        if(description===""){
+          error.description="**Content is required!";
+        }
+        if(subject===""){
+          error.subject="**Subject is required!";
+        }
+        if(tagline===""){
+            error.tagline="**Tagline is required!";
+          }
+          if(headline===""){
+            error.headline="**Headline is required!";
+          }
+        return error;
+    
+    }
 
     const handleRequest = async (e) => {
-        if (mailFrom && subject && name && tagline && headline !== "") {
-            if (description !== "") {
                 e.preventDefault()
                 setLoading(true)
-                const formData = new FormData();
+                setUserError(Validate(user));
+                setIsSubmit(true);
+                if(Object.keys(userError).length===0 && isSubmit){
+
+                    const formData = new FormData();
                 // formData.append("name", name);
+                formData.append("name", name);
+                formData.append("to", history.location.state.mailTo );
+                formData.append("from", mailFrom);
+                formData.append("subject", subject);
                 formData.append("file", selectedFile);
+                formData.append("description", description);
+                formData.append("headline", headline);
+                formData.append("tagline", tagline);
+                formData.append("value", history.location.state.value );
 
-                const body = {
-                    name,
-                    to: history.location.state.mailTo,
-                    from: mailFrom,
-                    subject,
-                    formData,
-                    description,
-                    headline,
-                    tagline,
-                    value: history.location.state.value
-                }
-                console.log(body);
+                // const body = {
+                //     name,
+                //     to: history.location.state.mailTo,
+                //     from: mailFrom,
+                //     subject,
+                //     formData,
+                //     description,
+                //     headline,
+                //     tagline,
+                //     value: history.location.state.value
+                // }
+                console.log(formData);
 
-                await axios.post(BaseUrl() + "api/template", body, {
+                await axios.post(BaseUrl() + "api/template", formData, {
                     headers: {
-                        'Content-type': 'application/json',
+                        "Content-Type": "multipart/form-data",
                         Authorization: bearer
                     }
                 }).then((res) => {
@@ -58,13 +109,9 @@ function Mailtemp() {
                     console.log(err)
                     setLoading(false)
                 })
-            } else {
-                alert('Compose Email')
-            }
 
-        } else {
-            alert('Please fill all required filled')
-        }
+                }
+                
 
     }
 
@@ -93,6 +140,7 @@ function Mailtemp() {
                                         size="40"
                                         placeholder="Enter Your Name" />
                                 </div>
+                                <p className="required">{userError.name}</p>
                                 <div style={{ padding: "1%", paddingLeft: "6%" }} className="From">
                                     <label style={{ padding: "1%", paddingLeft: "10%" }}>From</label>
                                     <input style={{ textAlign: "center", padding: "1% 0%" }}
@@ -104,17 +152,18 @@ function Mailtemp() {
                                         onChange={(e) => setMailFrom(e.target.value)}
                                         placeholder="Enter Your Email" />
                                 </div>
+                                <p className="required">{userError.mailFrom}</p>
                                 <div style={{ padding: "1%", paddingLeft: "6%" }} className="Attachment">
                                     <label style={{ padding: "1%", paddingLeft: "3%" }}>Attachment</label>
                                     <input style={{ textAlign: "center", padding: "1% 0%" }}
                                         type="file"
+                                        name="file"
                                         value={selectedFile}
-                                        accept=".pdf"
-                                        onChange={(e) => setSelectedFile(e.target.files[0])}
+                                        onChange={(e) => setSelectedFile(e.target.file)}
 
                                     />
                                 </div>
-
+                                    
 
                                 <div style={{ padding: "1%", paddingLeft: "6%" }} className="Subject">
                                     <label style={{ padding: "1%", paddingLeft: "8%" }}>Subject</label>
@@ -127,6 +176,7 @@ function Mailtemp() {
                                         type="text"
                                         placeholder="Add Subject" />
                                 </div>
+                                <p className="required">{userError.subject}</p>
 
                                 <div style={{ padding: "1%", paddingLeft: "6%" }} className="tagline-mail">
                                     <label style={{ padding: "1%", paddingLeft: "8%" }}>Tagline</label>
@@ -138,7 +188,7 @@ function Mailtemp() {
                                         size="40"
                                         placeholder="Enter the tagline" />
                                 </div>
-
+                                <p className="required">{userError.tagline}</p>
                                 <div style={{ padding: "1%", paddingLeft: "6%" }} className="headline-mail">
                                     <label style={{ padding: "1%", paddingLeft: "6%" }}>Headline</label>
                                     <input style={{ textAlign: "center", padding: "1% 0%" }}
@@ -149,7 +199,7 @@ function Mailtemp() {
                                         size="40"
                                         placeholder="Enter the headline" />
                                 </div>
-
+                                <p className="required">{userError.headline}</p>
                                 <div style={{ padding: "1%", paddingLeft: "6%" }} className="description-mail">
                                     <label className="tyu">Compose Mail</label>
                                     <textarea
@@ -162,6 +212,7 @@ function Mailtemp() {
                                         cols="70" />
 
                                 </div>
+                                <p className="required">{userError.description}</p>
 
                                 <button
                                     disabled={loading}
