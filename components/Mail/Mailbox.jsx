@@ -52,7 +52,7 @@ function Mail() {
 
   const Validate = (values)=>{
     const error={}
-    const regexMail=/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/
+    const regexMail=/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z0-9]$/
     
     if(!values.from){
         error.from="**Email Is Required!";
@@ -79,15 +79,15 @@ function Mail() {
         setIsSubmit(true);
         if(Object.keys(userError).length===0 && isSubmit){
 
-          console.log({ from, message, subject })
+          // console.log({ from, message, subject })
         const formData = new FormData();
         // formData.append("name", name);
-        formData.append("uploadFile", selectedFile);
-        formData.append("uploadFile", selectedFile);
-        formData.append("uploadFile", selectedFile);
-        formData.append("uploadFile", selectedFile);
-        formData.append("uploadFile", selectedFile);
-        formData.append("uploadFile", selectedFile);
+        formData.append("mailFrom", from);
+        formData.append("mailTo", history.location.state.mailTo );
+        formData.append("subject", subject);
+        formData.append("content", message);
+        formData.append("file", selectedFile);
+    
 
     //     public String mailFrom;
     // public String[] mailTo;
@@ -95,26 +95,27 @@ function Mail() {
     // public String content;
     // private MultipartFile file;
 
-        const body = {
-          mailFrom: from,
-          mailTo: history.location.state.mailTo,
-          subject,
-          formData,
+        // const body = {
+        //   mailFrom: from,
+        //   mailTo: history.location.state.mailTo,
+        //   subject,
+        //   formData,
 
-          content: message
-        }
-        console.log(body);
-        console.log(history.location.state.mailTo);
-        console.log(body.mailTo);
+        //   content: message
+        // }
+        // console.log(body);
+        // console.log(history.location.state.mailTo);
+        // console.log(body.mailTo);
 
-        await axios.post(BaseUrl() + "api/mail", body, {
+        console.log(formData);
+
+        await axios.post(BaseUrl() + "api/mail", formData, {
           headers: {
-            // "Cache-Control": "no-cache",
+         
             "Content-Type": "multipart/form-data",
-            // "Content-Type": ,
+           
             Authorization: bearer
-            // "Accept-Language": "en",
-            // "Access-Control-Allow-Origin": "*",
+            
           }
         }).then((res) => {
           alert('Email Sent Successfully')
@@ -225,11 +226,12 @@ function Mail() {
                     <label style={{ padding: "1%", paddingLeft: "3%" }}>Attachment</label>
                     <input style={{ textAlign: "center", padding: "1% 0%" }}
                       type="file"
+                      name="file"
                       value={selectedFile}
                       onChange={(e) => {
                         e.preventDefault();
 
-                        setSelectedFile(e.target.files[0])
+                        setSelectedFile(e.target.file)
 
                       } }
 

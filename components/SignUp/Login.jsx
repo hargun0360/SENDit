@@ -69,9 +69,9 @@ function Login() {
     
     const Validate = (values)=>{
         const error={}
-        const regexMail=/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/
+        const regexMail=/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z0-9]$/
         const regexName=/^[A-Za-z. ]{3,30}$/;
-        const regexPass=/^[a-zA-Z0-9@#!$%^_]{8,12}$/;
+        const regexPass=/^[a-zA-Z0-9@#!$%^_]{8,}$/;
         if(!values.Name){
             error.Name="**Name Is Required!";
         }else if(!regexName.test(values.Name)){
@@ -89,8 +89,6 @@ function Login() {
         }
         else if(values.password.length < 8){
             error.password="**Password must be more than 8 characters!";
-        }else if(values.password.length > 12){
-            error.password="**Password must be less than 12 characters!";
         }
         if(!values.cpassword){
             error.cpassword="**Password Is Required!";

@@ -66,7 +66,7 @@ function Sign(){
     }
     const Validate = (values)=>{
         const error={}
-        const regexMail=/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/
+        const regexMail=/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z0-9]$/
         // const regexName=/^[A-Za-z. ]{3,30}$/;
         const regexPass=/^[a-zA-Z0-9@#!$%^_]{8,}$/;
         // if(!values.Name){
@@ -83,8 +83,6 @@ function Sign(){
             error.password="**Password Is Required!";
         }else if(values.password.length < 8){
             error.password="**Password must be more than 8 characters!";
-        }else if(values.password.length > 12){
-            error.password="**Password must be less than 12 characters!";
         }else if(!regexPass.test(values.password)){
             error.password="**This is not a valid password!";
         }
