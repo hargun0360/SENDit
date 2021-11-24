@@ -19,23 +19,22 @@ const Homenavbar = () => {
 
                 <div className="nav-icons1">
                     <ul className="menu-box1">
+                    
                         <li className="item1">
-                            <NavLink to="/" className="text">Shedule Mail</NavLink>
+                            <NavLink to="/"  className="text">Templates</NavLink>
                         </li>
                         <li className="item1">
-                            <NavLink to="/about" className="text">Templates</NavLink>
+                            <NavLink to="/Manage" activeClassName="activeLink" className="text">Manage Groups</NavLink>
                         </li>
                         <li className="item1">
-                            <NavLink to="/test" className="text">Manage Groups</NavLink>
-                        </li>
-                        <li className="item1">
-                            <NavLink to="/contact" className="text">Premium</NavLink>
+                            <NavLink to="/Error" activeClassName="activeLink" className="text">Premium</NavLink>
                         </li>
                     </ul>
                 </div>
 
                 <div className="auth">
                     <ul className="authenticate">
+                    
                         <li className="item1">
                             <NavLink to="/SignUp" className="text">Sign Up</NavLink>
                         </li>

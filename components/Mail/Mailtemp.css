@@ -1,7 +1,169 @@
-.Mail-box{
+.Mail-box1{
     height: 100vh;
     width: 100vw;
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    background-color: whitesmoke;
+    
 }
+
+
+
+.ig{
+        width: 100%;
+        height: 120%;
+    }
+
+    .feature-box1{
+
+        background-color: #FBF2F2;
+        
+        width: 50%;
+        height: 35%;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 10px 12px rgba(0, 0, 0, 0.157);
+        transition: 0.3s ease-in-out;
+        position: relative;
+        top: 15%;
+        margin-left: 10%;
+        
+    
+    }
+    
+    .Home-Link1{
+        font-family:sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    text-align: center;
+    color: #130000;
+    text-decoration: none;
+    }
+    
+    
+    .button8{
+        border-style: none;
+        box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding: 2% 5% 2% 5%;
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    top: 80%;
+    left: 33%;
+    background: #FFFEFE;
+    border: 1px solid #000000;
+        
+    }
+    .button8:hover{
+
+        background-color: rgb(248, 78, 11);
+            color:#ffffff;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            transition: all ease 0.2s;
+
+    }
+    .feature-box4{
+
+        background-color: #FBF2F2;
+        margin-top: 3%;
+        width: 50%;
+        height: 35%;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 10px 12px rgba(0, 0, 0, 0.157);
+        transition: 0.3s ease-in-out;
+        position: relative;
+        top: 15%;
+        margin-left: 10%;
+        
+
+    }
+    .feature-box3{
+
+        background-color: #FBF2F2;
+        margin-top: 3%;
+        width: 50%;
+        height: 35%;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 10px 12px rgba(0, 0, 0, 0.157);
+        transition: 0.3s ease-in-out;
+        position: relative;
+        top: 15%;
+        margin-left: 10%;
+
+    }
+    .feature-box2{
+
+        background-color: #FBF2F2;
+        margin-top: 3%;
+        width: 50%;
+        height: 35%;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 10px 12px rgba(0, 0, 0, 0.157);
+        transition: 0.3s ease-in-out;
+        position: relative;
+        top: 15%;
+        margin-left: 10%;
+
+    }
+
+    .feature-box4:hover{
+    
+        box-shadow: 0px 8px 9px 7px rgba(0, 0, 0, 0.25);
+    
+    }
+    .feature-box3:hover{
+    
+        box-shadow: 0px 8px 9px 7px rgba(0, 0, 0, 0.25);
+    
+    }
+    .feature-box2:hover{
+    
+        box-shadow: 0px 8px 9px 7px rgba(0, 0, 0, 0.25);
+    
+    }
+    .feature-box1:hover{
+    
+        box-shadow: 0px 8px 9px 7px rgba(0, 0, 0, 0.25);
+    
+    }
+    .Box3{
+        
+            
+            
+            height: fit-content;
+            width: fit-content;
+            margin-top: 4%;
+            margin-left: 15%;
+            height: 70%;
+            width: 65%;
+            padding: 3%;
+        
+    }
+
+    #send-btn{
+        margin-left: 40%;
+        padding: 1% 4%;
+    }
+
+    .tyu{
+         padding: 1%;
+         padding-left: 0%;
+    }
+@media (min-width:1350px)and (max-width:1400px){
+
+    .tyu{
+        padding: 1% 6% 1% 0%;
+    }
+
+}
+@media (min-width:1401px){
+
+    .tyu{
+        padding: 1% 20% 1% 0%;
+    }
+
+}
+    
