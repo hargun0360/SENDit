@@ -15,29 +15,25 @@ import Mail from './components/Mail/Mailbox'
 import GroupD from './components/Mail/Delete'
 import Mailtemp from './components/Mail/template'
 import Homenavbar from './components/Homepage/Homenavbar'
-import Header from './components/Homepage/Header'
-
 
 function App(){
     
     return(
         <div>
             <Switch>
-            <Route exact path="/Header" component={Header} />
             <Route exact path="/SignUp" component={Login} />
             <Route path="/SignIn" component={Sign} />
             <Route path="/Forgotpassword" component={Forgot} />
             <Route path="/OTP" component={Otp} />
             <Route path="/OTPP" component={Otpp} />
-            <Route path="/CSV" component={CSV} />
-            <Route path="/test" component={Send} />
-            <Route path="/Fileread" component={Fileread} />
-            <Route path="/Drop" component={Dropdown} />
-            <Route path="/Mail" component={Mail} />
-            <Route path="/GroupD" component={GroupD} />
-            <Route path="/temp" component={Mailtemp} />
-            <Route path="/" component={Homenavbar} />
-           
+            <Route path="/CSV"component={CSV} />
+            <Route path="/test"component={Send} />
+            <Route path="/Fileread"component={Fileread} />
+            <Route path="/Drop"component={Dropdown} />
+            <Route path="/Mail"component={Mail} />
+            <Route path="/GroupD"component={GroupD} />
+            <Route path="/temp"component={Mailtemp} />
+            <Route path="/"component={Homenavbar} />
 
             
             

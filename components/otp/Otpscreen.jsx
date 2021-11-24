@@ -3,15 +3,14 @@ import Navbar from '../Navbar/Navbar'
 import Image from '../Imagecompo/Image'
 import './otp.css'
 import axios from 'axios'
-import { useHistory } from 'react-router-dom'
+import {useHistory } from 'react-router-dom'
 import Error from '../Error/Error'
-import { BaseUrl } from '../../api/Baseurl'
+import {BaseUrl} from '../../api/Baseurl'
 
 
 function Otp() {
 
     const [user, setUser] = useState({ otp: "" })
-    const [disable, setDisable] = useState(false);
     let name, value;
     const handleInputs = (e) => {
         name = e.target.name;
@@ -20,74 +19,67 @@ function Otp() {
     }
     const [allEntry, setallEntery] = useState([]);
     const history = useHistory();
-
+    
 
     const submitForm = (event) => {
         event.preventDefault();
-        const newEntry = { ...user }
+        const newEntry = { ...user}
         setallEntery([...allEntry, newEntry]);
 
         let object = {
             otp: newEntry.otp,
             name: history.location.state.name,
-            mailAddress: history.location.state.mailAddress,
-            password: history.location.state.password
+            mailAddress : history.location.state.mailAddress,
+            password : history.location.state.password
         }
-
+        
         const config = {
             method: "POST",
             url: BaseUrl() + "api/user/validate",
             headers: {
                 "content-Type": "application/json"
             },
-            data: JSON.stringify(object)
+            data : JSON.stringify(object)
         }
         axios(config).then((res) => {
             console.log(res);
-            if (res.data === "You are registered successfully") {
+            if(res.data === "You are registered successfully"){
                 alert("You are registered Successfully");
                 history.push("/Error");
-            } else if (res.data === "Entered Otp is NOT valid. Please Retry!") {
+            }else if(res.data === "Entered Otp is NOT valid. Please Retry!"){
                 alert("Entered Otp is NOT valid. Please Retry!");
                 history.push("/OTP")
             }
-
+            
         }).catch((error) => {
             <Error />
         })
         setUser({ ...user, otp: "" });
     }
-
-    const handleClick = () => {
-        let again = {
+    
+    const handleClick = ()=>{
+        let again ={
             name: history.location.state.name,
-            mailAddress: history.location.state.mailAddress,
-            password: history.location.state.password
+            mailAddress : history.location.state.mailAddress,
+            password : history.location.state.password
         }
 
-        setDisable(true);
-
-
+        console.log(again);
         const configuration = {
 
             method: "POST",
-            url: BaseUrl() + "api/user/generateOtp",
+            url: (BaseUrl() + "api/user/generateOtp"),
             headers: {
                 "content-Type": "application/json"
             },
-            data: JSON.stringify(again)
+            data : JSON.stringify(again)
 
         }
         axios(configuration).then((res) => {
             console.log(res);
-            alert("otp sent successfully");
-
+            // alert("otp sent successfully");
+            
         })
-
-        setTimeout(() => {
-            setDisable(false);
-        }, 10000);
-
     }
 
     return (
@@ -106,7 +98,7 @@ function Otp() {
 
                             <div className="col-lg-2-1">
                                 <i className="fa fa-key icon"></i>
-                                <input type="text" name="otp" placeholder="OTP" value={user.otp} onChange={handleInputs} className="input1" size="30" />
+                                <input type="text" name="otp" placeholder="OTP" value={user.otp} onChange={handleInputs} className="input1" size="30" required />
                             </div>
                         </div>
 
@@ -120,7 +112,7 @@ function Otp() {
                         <div className="form-row" id="gg">
 
                             <div className="col-lg-2">
-                                <button type="submit" disabled={disable} className="btn5" onClick={handleClick} >Resend</button>
+                                <button type="submit" className="btn5" onClick={handleClick} >Resend</button>
                             </div>
 
                         </div>
