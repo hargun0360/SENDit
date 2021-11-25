@@ -47,13 +47,13 @@ function App(){
             <Route exact path='/Header'>
               <Homenavbar />
             </Route>
-            <PrivateRoute exact path='/Manage'>
+            <Route exact path='/Manage'>
               <ManageHome />
-            </PrivateRoute>
+            </Route>
             <PrivateRoute exact path='/Error'>
               <Error />
             </PrivateRoute>
-            <Route exact path='/Logout'>
+            <Route exact path='/Data'>
               <Logout />
             </Route>
             

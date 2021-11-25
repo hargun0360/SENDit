@@ -8,6 +8,7 @@ import Error from '../Error/Error'
 import {useHistory} from 'react-router-dom'
 import {BaseUrl} from '../../api/Baseurl'
 
+
 function Sign(){
 
     const [user,setUser] = useState({email:"",password:""})
@@ -66,7 +67,7 @@ function Sign(){
     }
     const Validate = (values)=>{
         const error={}
-        const regexMail=/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z0-9]$/
+        const regexMail=/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/
         // const regexName=/^[A-Za-z. ]{3,30}$/;
         const regexPass=/^[a-zA-Z0-9@#!$%^_]{8,}$/;
         // if(!values.Name){
@@ -94,7 +95,12 @@ function Sign(){
         
         <div className="box">
             <Navbar name="Sign Up" />
-            <Image />
+            <div className="Mail-image">
+                    <Image />
+                </div>
+                <div className="Signin">
+
+               
             <div className="container">
             <h3 className="heading1">Get Your Account Sign In</h3>
             <div className="row">
@@ -159,6 +165,7 @@ function Sign(){
                      </div>
                  </div>
             </div>
+        </div>
         </div>
          
     );

@@ -19,7 +19,7 @@ const Homenav = () => {
                 <div className="nav-icons">
                     <ul className="menu-box">
                         <li className="item">
-                            <NavLink to="/"  className="text">Templates</NavLink>
+                            <NavLink to="/"  className="text">Home</NavLink>
                         </li>
                         <li className="item">
                             <NavLink to="/Manage" activeClassName="activeLink" className="text">Manage Groups</NavLink>

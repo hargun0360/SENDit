@@ -20,21 +20,9 @@
     width: 133%;
 }
 
-@media (min-width:1400px){
-    .btn0{
-        padding:10px 350% ;
-    }
-}
-@media (max-width:1200px) and (min-width:991px){
-    .btn0{
-        padding:10px 485% ;
-    }
-    .qt{
-        width: 200%;
-    }
-}
 
-@media (max-width:991px){
+
+/* @media (max-width:991px){
     .btn0{
         padding:10px 20% ;
     }
@@ -42,8 +30,5 @@
         display: flex;
         flex-direction:column;
     }
-    /* .container22{
-        margin-top: 52%;
-        margin-left: 33%;
-    } */
-}
+
+} */

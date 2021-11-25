@@ -24,7 +24,6 @@ function Group() {
         setText(e.target.value);
     }
 
-    console.log(text);
     const Submit = () => {
         const file = csvFile;
         const reader = new FileReader();
@@ -46,8 +45,9 @@ function Group() {
                 data: JSON.stringify(object)
             }
             axios(config).then((res) => {
-                if (res.data === "Added the group successfully") {
-                    alert("Added the group successfully");
+               
+                if (res.data === "Added the groupName successfully") {
+                    alert("Added the groupName successfully");
                     setDisable(true);
                 }
             })
@@ -88,10 +88,12 @@ function Group() {
                     }
                     if (res.data === "Please choose another name") {
                         alert("Please choose another name");
+                        setText("");
                     }
                     if (res.data === "Added the groupName successfully now upload the mailAddresses") {
                         alert("Added the groupName successfully now upload the mailAddresses");
                         setDisable(false);
+                        setText("");
                     }
 
 

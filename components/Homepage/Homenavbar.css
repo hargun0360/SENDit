@@ -76,3 +76,27 @@ li {
     justify-content: space-around;
     align-items: center;
 }
+
+@media (max-width:1140px){
+
+    .text{
+        font-size: 16px;
+    }
+
+}
+
+@media (max-width:874px){
+
+    .text{
+        font-size: 14px;
+    }
+    .logo-image1{
+        margin-top: 5%;
+        height: 50%;
+        width: 50%;
+    }
+    .title1{
+        margin-top: 8%;
+    }
+
+}
