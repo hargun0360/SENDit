@@ -39,12 +39,15 @@ function GroupD() {
                     console.log(res.data);
                     if (res.data === "Please enter a group Name to delete") {
                         alert("Please enter a group Name to delete");
+                        setText("")
                     }
                         if (res.data === "Removed the group successfully") {
                                 alert("Removed the group successfully");
+                                setText("")
                             }
                             if (res.data === "Please choose valid group name") {
                             alert("Please choose valid group name");
+                            setText("")
                             
                         }
                     

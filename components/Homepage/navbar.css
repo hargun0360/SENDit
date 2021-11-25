@@ -65,3 +65,23 @@ li {
     padding: 5px;
     
 }
+
+@media (max-width:937px){
+    .text{
+        font-size: 16px;
+    }
+    .logo-image{
+        margin-top: 5%;
+        height: 60%;
+        width: 50%;
+    }
+    .title{
+        margin-top: 7%;
+    }
+}
+@media (max-width:724px){
+    .title{
+        margin-top: 7%;
+        font-size: 20px;
+    }
+}

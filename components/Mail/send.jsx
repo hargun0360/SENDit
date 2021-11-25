@@ -113,7 +113,7 @@ function Sending(props) {
       axios(config).then((res) => {
           // console.log(res.data);
 
-          // console.log(uniq);
+          console.log(uniq);
           history.push({
             pathname : "/Mail",
             state : {mailTo:uniq,bool:res.data}

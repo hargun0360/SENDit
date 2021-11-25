@@ -9,22 +9,32 @@ function Dropdown() {
 
     let bearer = 'Bearer ' + localStorage.getItem('tokendata');
 
-    useEffect(() => {
-        // loadUsers();
-        API();
-        async function API() {
-            const res = await axios.get(BaseUrl() + "api/group/getGroupNames",{ headers: {Authorization : bearer} });
+//     useEffect(() => {
+//         loadUsers();
+        
+//         // async function API() {
+//         //     const res = await axios.get(BaseUrl() + "api/group/getGroupNames",{ headers: {Authorization : bearer} });
 
-            setGroups(res.data)
-          }
-        //   API();
-      });
-//dependency groups
-    //   const loadUsers = async () => {
-    //     const res = await axios.get(BaseUrl() + "api/group/getGroupNames",{ headers: {Authorization : bearer} });
-    //     console.log(res);
-    //     setGroups(res.data)
-    //   }
+//         //     setGroups(res.data)
+//         //   }
+//         //   API();
+//       },[]);
+// //dependency groups
+//       const loadUsers = async () => {
+//         const res = await axios.get(BaseUrl() + "api/group/getGroupNames",{ headers: {Authorization : bearer} });
+//         console.log(res);
+//         setGroups(res.data)
+//       }
+
+useEffect(() => {
+    loadUsers();
+  }, [groups]);
+
+  const loadUsers = async () => {
+    const res = await axios.get(BaseUrl() + "api/group/getGroupNames",{ headers: {Authorization : bearer} });
+    // console.log(res);
+    setGroups(res.data)
+  }
 
     // console.log(groups);
 
