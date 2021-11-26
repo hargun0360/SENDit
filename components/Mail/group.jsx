@@ -4,13 +4,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { obj } from './csv'
 import { BaseUrl } from '../../api/Baseurl'
 import axios from 'axios';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 
 function Group() {
     // localStorage.removeItem("response");
-    
+
 
     const [group, setGroup] = useState("");
 
@@ -18,10 +21,12 @@ function Group() {
     let bearer = 'Bearer ' + localStorage.getItem('tokendata');
     const [csvFile, setCsvFile] = useState();
     const [disable, setDisable] = useState(true);
+    const [loading, setLoading] = useState(false)
 
 
     const handleInputs = (e) => {
         setText(e.target.value);
+        toast.success('Added the Group successfully');
     }
 
     const Submit = () => {
@@ -35,6 +40,7 @@ function Group() {
                 groupName: group,
                 mailAddresses: mailAddresses
             }
+            setLoading(true);
             const config = {
                 method: "POST",
                 url: BaseUrl() + "api/group/addGroup",
@@ -45,9 +51,10 @@ function Group() {
                 data: JSON.stringify(object)
             }
             axios(config).then((res) => {
-               
+
                 if (res.data === "Added the groupName successfully") {
-                    alert("Added the groupName successfully");
+                    setLoading(false);
+                    toast.success('Added the Group successfully');
                     setDisable(true);
                 }
             })
@@ -59,65 +66,88 @@ function Group() {
 
     return (
         <>
+
+{
+                  loading &&  <Backdrop
+                        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                        open
+                    >
+                        <CircularProgress color="inherit" />
+                    </Backdrop>
+                }
             <div className="group-submit">
-            <input type="text" size="35" className="groupName" placeholder="Enter Group Name" value={text} onChange={handleInputs}></input>
-            <button className="group-button" style={{ display: "block" }} onClick={(e) => {
-                e.preventDefault()
+                <input type="text" size="35" className="groupName" placeholder="Enter Group Name" value={text} onChange={handleInputs}></input>
+                <button className="group-button" style={{ display: "block" }} onClick={(e) => {
+                    e.preventDefault()
+                    setLoading(true);
 
-
-                const configuration = {
-                    method: "POST",
-                    url: BaseUrl() + "api/group/unique",
-                    headers: {
-                        "content-Type": "application/json",
-                        Authorization: bearer
-                    },
-                    data: {
-                        groupName: text
+                    const configuration = {
+                        method: "POST",
+                        url: BaseUrl() + "api/group/unique",
+                        headers: {
+                            "content-Type": "application/json",
+                            Authorization: bearer
+                        },
+                        data: {
+                            groupName: text
+                        }
                     }
-                }
-                axios(configuration).then((res) => {
-                    console.log(res);
-                    // if(res.data==="Added the groupName successfully now upload the mailAddresses"){
-                    //     localStorage.setItem('response',true);
-                    // }
-                        
+                    axios(configuration).then((res) => {
+                        console.log(res);
+                        // if(res.data==="Added the groupName successfully now upload the mailAddresses"){
+                        //     localStorage.setItem('response',true);
+                        // }
+
                         setGroup(text);
-                    if (res.data === "Please enter a group Name") {
-                        alert("Please enter a group Name");
-                    }
-                    if (res.data === "Please choose another name") {
-                        alert("Please choose another name");
-                        setText("");
-                    }
-                    if (res.data === "Added the groupName successfully now upload the mailAddresses") {
-                        alert("Added the groupName successfully now upload the mailAddresses");
-                        setDisable(false);
-                        setText("");
-                    }
+                        if (res.data === "Please enter a group Name") {
+                            setLoading(false);
+                            toast.error('Please enter a group Name');
+                            
+                        }
+                        if (res.data === "Please choose another name") {
+                            setLoading(false);
+                            toast.error('Please choose another name');
+                            setText("");
+                        }
+                        if (res.data === "Added the groupName successfully now upload the mailAddresses") {
+                            setLoading(false);
+                            toast.success('Added the groupName successfully now upload the mailAddresses');
+                            setDisable(false);
+                            setText("");
+                        }
 
 
-                });
-
-               
+                    });
 
 
-            }}>Submit</button>
+
+
+                }}>Submit</button>
+
             </div>
-            <div className="group-file" style={{ marginTop:"15%", marginLeft:"10%" }}>
+            <div className="group-file" style={{ marginTop: "15%", marginLeft: "10%" }}>
 
-            <input type="file" accept=".csv" id="csvFile" onChange={(e) => { setCsvFile(e.target.files[0]) }} />
-            <button className="Csv-button" disabled={disable}  style={{ display: "block" }} onClick={(e) => {
+                <input type="file" accept=".csv" id="csvFile" onChange={(e) => { setCsvFile(e.target.files[0]) }} />
+                <button className="Csv-button" disabled={disable} style={{ display: "block" }} onClick={(e) => {
 
-                if (csvFile) {
-                    Submit();
+                    if (csvFile) {
+                        Submit();
 
 
-                }
-            }}>Upload</button>
+                    }
+                }}>Upload</button>
+
             </div>
 
 
+            <ToastContainer
+            theme="colored"
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={true}
+                newestOnTop={false}
+                pauseOnHover={false}
+                closeOnClick />
         </>
     );
 }
@@ -126,3 +156,5 @@ export default Group;
 
 
 {/* {result!==null?<CSV tex={result}/>:<CSV tex={null} />} */ }
+
+

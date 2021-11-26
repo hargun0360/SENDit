@@ -4,6 +4,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import './test.css'
 import {  useHistory } from 'react-router-dom'
 import {BaseUrl} from '../../api/Baseurl'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 var c=0;
 var arr = [];
@@ -12,6 +17,7 @@ var array = [];
 function Sending(props) {
 
     const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(false)
     // let list=[{name:"hargun"},{name:"palak"},{name:"saksham"}];
     let bearer = 'Bearer ' + localStorage.getItem('tokendata');
             
@@ -54,7 +60,6 @@ function Sending(props) {
         e.preventDefault();
         
         
-        
                 
         for (let i = 0; i < users.length; i++) {
             if (users[i].isChecked === true) {
@@ -81,7 +86,7 @@ function Sending(props) {
 
 
         
-        alert("Mailaddress are added successfully");
+        toast.success("Mailaddress are added successfully");
       
         setUsers([]);
         array=[];
@@ -96,8 +101,10 @@ function Sending(props) {
 
     const handleFinalSub = () => {
 
+      setLoading(true);
+
       if(uniq.length===0){
-        alert("Please Choose the MailAddress");
+        toast.warn("Please Choose the MailAddress");
       }
       else{
 
@@ -112,7 +119,7 @@ function Sending(props) {
       
       axios(config).then((res) => {
           // console.log(res.data);
-
+          setLoading(false);
           console.log(uniq);
           history.push({
             pathname : "/Mail",
@@ -129,6 +136,15 @@ function Sending(props) {
       
         return (
             <>
+
+{
+                  loading &&  <Backdrop
+                        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                        open
+                    >
+                        <CircularProgress color="inherit" />
+                    </Backdrop>
+                }
           
             <form className="To" style={{marginLeft:"-10%"}} onSubmit={Submit}>
               <h3 style={{width:"130%",marginTop:"40%"}}>All MailAddresses</h3>
@@ -165,6 +181,14 @@ function Sending(props) {
                     <button type="submit" className="btn btn-success" id="Final-btn" onClick={handleFinalSub}>Final Submission</button>
                     </div>
 
+                    <ToastContainer
+                    theme="colored"
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={true}
+                newestOnTop={false}
+                pauseOnHover={false}
+                closeOnClick />
             </>
 
         );

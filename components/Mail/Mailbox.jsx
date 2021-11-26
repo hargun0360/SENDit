@@ -9,6 +9,8 @@ import imag1 from '../../Images/temp1.png'
 import imag2 from '../../Images/temp2.png'
 import imag3 from '../../Images/temp3.png'
 import imag4 from '../../Images/temp4.png'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Mail() {
 
@@ -116,22 +118,24 @@ function Mail() {
           }
         }).then((res) => {
           console.log(res.data);
-          alert('Email Sent Successfully')
+          toast.success('Email Sent Successfully')
           setLoading(false)
           setFrom("");
         setMessage("");
         setSubject("");
           console.log(res)
-        }).catch((err) => {
-          console.log(err)
+        }).catch(() => {
+          toast.error("Failed! Email Not Sent")
           setLoading(false)
         })
       } else {
-        alert('Compose Email')
+        toast.warn('Compose Email')
       }
 
     
-  }   
+  }else {
+    toast.warn('Please fill all required filled')
+}   
        
 
   }
@@ -282,6 +286,16 @@ function Mail() {
         </div>
       </div>
       {/* </div> */}
+
+      <ToastContainer
+      theme="colored"
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={true}
+                newestOnTop={false}
+                pauseOnHover={false}
+                closeOnClick />
+
     </>
   );
 }

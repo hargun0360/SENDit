@@ -4,8 +4,14 @@ import { Link, useHistory } from 'react-router-dom'
 import Image from '../Imagecompo/Image'
 import './SignUp.css'
 import axios from 'axios';
-import Error from '../Error/Error'
 import { BaseUrl } from '../../api/Baseurl'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+
+
 
 function Login() {
     const [user, setUser] = useState({ Name: "", email: "", password: "", cpassword: "" })
@@ -22,8 +28,9 @@ function Login() {
     const history = useHistory();
     const [userError, setUserError] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
+    const [loading, setLoading] = useState(false)
 
-    const submitForm = (event) => {
+    const submitForm = async (event) => {
         event.preventDefault();
         setUserError(Validate(user));
         setIsSubmit(true);
@@ -36,6 +43,7 @@ function Login() {
                 password: newEntry.password
             }
             // DATA transfer and get response
+            setLoading(true);
             const config = {
                 method: "POST",
                 url: BaseUrl() + "api/user/generateOtp",
@@ -44,21 +52,29 @@ function Login() {
                 },
                 data: JSON.stringify(object)
             }
-            axios(config).then((res) => {
+            await axios(config).then((res) => {
                 console.log(res);
                 if (res.data === "You already have an account please Login") {
-                    alert("You already have an account please Login");
-                    history.push("/SignIn");
+                    toast.warn("You already have an account please Login");
+                    setTimeout(() => {
+                        history.push("/SignIn");
+                    }, 2000);
+                    setLoading(false);
                 }
                 else if (res.data === "Otp Sent") {
-                    alert("Otp Sent successfully");
-                    history.push({
-                        pathname: "/OTP",
-                        state: object
-                    });
+                    toast.success("Otp Sent successfully");
+                    setTimeout(() => {
+                        history.push({
+                            pathname: "/OTP",
+                            state: object
+                        });
+                    }, 2000);
+                    setLoading(false);
+
                 }
             }).catch(() => {
-                <Error />
+                toast.error("Failed! Network Error");
+                setLoading(false);
             })
             setUser({ ...user, Name: "", email: "", password: "", cpassword: "" });
 
@@ -100,15 +116,25 @@ function Login() {
         return error;
 
     }
-    return (
+    return (<>
+
+                {
+                  loading &&  <Backdrop
+                        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                        open
+                    >
+                        <CircularProgress color="inherit" />
+                    </Backdrop>
+                }
 
         <div className="box">
             <Navbar name="Sign In" />
             <div className="model">
-            
+
                 <div className="Mail-image">
                     <Image />
                 </div>
+                
 
 
                 <div className="SignUp">
@@ -185,6 +211,16 @@ function Login() {
                 </div>
             </div>
         </div>
+        <ToastContainer
+            theme="colored"
+            position="top-center"
+            autoClose={2000}
+            hideProgressBar={true}
+            newestOnTop={false}
+            pauseOnHover={false}
+            closeOnClick />
+
+    </>
     );
 }
 

@@ -3,6 +3,8 @@ import axios from 'axios'
 import Homenav from '../Homepage/navbar'
 import { BaseUrl } from '../../api/Baseurl'
 import { useHistory } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import './Mailtemp.css'
 
@@ -46,7 +48,7 @@ function Mailtemp() {
                         Authorization: bearer
                     }
                 }).then((res) => {
-                    alert('Email Sent Successfully')
+                    toast.success('Email Sent Successfully')
                     setMailFrom("");
                     setName("");
                     setSubject("");
@@ -56,15 +58,15 @@ function Mailtemp() {
                     setLoading(false)
                     console.log(res)
                 }).catch((err) => {
-                    console.log(err)
+                    toast.error("Failed! Email Not Sent")
                     setLoading(false)
                 })
             } else {
-                alert('Compose Email')
+                toast.warn('Compose Email')
             }
 
         } else {
-            alert('Please fill all required filled')
+            toast.warn('Please fill all required filled')
         }
 
     }
@@ -174,7 +176,14 @@ function Mailtemp() {
                     </form>
                 </div>
             </div>
-
+            <ToastContainer
+            theme="colored"
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={true}
+                newestOnTop={false}
+                pauseOnHover={false}
+                closeOnClick />
         </>
     );
 }

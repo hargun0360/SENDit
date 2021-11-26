@@ -47,9 +47,9 @@ function App(){
             <Route exact path='/Header'>
               <Homenavbar />
             </Route>
-            <Route exact path='/Manage'>
+            <PrivateRoute exact path='/Manage'>
               <ManageHome />
-            </Route>
+            </PrivateRoute>
             <PrivateRoute exact path='/Error'>
               <Error />
             </PrivateRoute>

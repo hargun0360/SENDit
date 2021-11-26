@@ -4,9 +4,11 @@ import Image from '../Imagecompo/Image'
 import './otp.css'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
-import Error from '../Error/Error'
 import { BaseUrl } from '../../api/Baseurl'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function Otp() {
 
@@ -20,10 +22,12 @@ function Otp() {
     }
     const [allEntry, setallEntery] = useState([]);
     const history = useHistory();
+    const [loading, setLoading] = useState(false)
 
 
     const submitForm = (event) => {
         event.preventDefault();
+        setLoading(true);
         const newEntry = { ...user }
         setallEntery([...allEntry, newEntry]);
 
@@ -45,14 +49,19 @@ function Otp() {
         axios(config).then((res) => {
             console.log(res);
             if (res.data === "You are registered successfully") {
-                alert("You are registered Successfully");
-                history.push("/SignIn");
+                setLoading(false);
+                toast.success("You are registered Successfully");
+                setTimeout(() => {
+                    history.push("/SignIn");
+                }, 2000);
             } else if (res.data === "Entered Otp is NOT valid. Please Retry!") {
-                alert("Entered Otp is NOT valid. Please Retry!");
+                setLoading(false);
+                toast.error("Entered Otp is NOT valid. Please Retry!");
             }
 
-        }).catch((error) => {
-            <Error />
+        }).catch(() => {
+            setLoading(false);
+            toast.error("Failed! Network Error");
         })
         setUser({ ...user, otp: "" });
     }
@@ -64,6 +73,7 @@ function Otp() {
             password: history.location.state.password
         }
 
+        setLoading(true);
         setDisable(true);
 
 
@@ -78,8 +88,9 @@ function Otp() {
 
         }
         axios(configuration).then((res) => {
+            setLoading(false);
             console.log(res);
-            alert("otp sent successfully");
+            toast.success("otp sent successfully");
 
         })
 
@@ -89,7 +100,16 @@ function Otp() {
 
     }
 
-    return (
+    return (<>
+
+{
+                  loading &&  <Backdrop
+                        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                        open
+                    >
+                        <CircularProgress color="inherit" />
+                    </Backdrop>
+                }
 
         <div className="box">
 
@@ -130,6 +150,17 @@ function Otp() {
             </div>
 
         </div>
+        <ToastContainer
+        theme="colored"
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={true}
+                newestOnTop={false}
+                pauseOnHover={false}
+                closeOnClick />
+
+
+        </>
     );
 
 }

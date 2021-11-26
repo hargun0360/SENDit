@@ -4,8 +4,11 @@ import Image from '../Imagecompo/Image'
 import './otp.css'
 import axios from 'axios'
 import {useHistory } from 'react-router-dom'
-import Error from '../Error/Error'
 import {BaseUrl} from '../../api/Baseurl'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function Otpp() {
 
@@ -19,10 +22,12 @@ function Otpp() {
     }
     const [allEntry, setallEntery] = useState([]);
     const history = useHistory();
+    const [loading, setLoading] = useState(false)
 
 
     const submitForm = (event) => {
         event.preventDefault();
+        setLoading(true);
         const newEntry = { ...user}
         setallEntery([...allEntry, newEntry]);
 
@@ -44,15 +49,19 @@ function Otpp() {
         axios(config).then((res) => {
             console.log(res);
             if(res.data === "Changed the password successfully"){
-                alert("Changed the password Successfully");
-                history.push("/SignIn");
+                setLoading(false);
+                toast.success("Changed the password Successfully");
+                setTimeout(() => {
+                    history.push("/SignIn");
+                }, 2000);
             }else if(res.data === "Entered Otp is NOT valid. Please Retry!"){
-                alert("Entered Otp is NOT valid. Please Retry!");
-                history.push("/Forgotpassword");
+                setLoading(false);
+                toast.error("Entered Otp is NOT valid. Please Retry!");
             }
 
         }).catch((error) => {
-           <Error />
+            setLoading(false);
+            toast.error("Failed! Network Error");
         })
         setUser({ ...user, otp: "" });
     }
@@ -62,7 +71,7 @@ function Otpp() {
             mailAddress : history.location.state.email,
             password : history.location.state.newpassword
         }
-
+        setLoading(true);
         setDisable(true);
         const configuration = {
 
@@ -76,7 +85,8 @@ function Otpp() {
         }
         axios(configuration).then((res) => {
             console.log(res);
-             alert("otp sent successfully");
+            setLoading(false);
+             toast.success("otp sent successfully");
             
         })
 
@@ -85,7 +95,17 @@ function Otpp() {
         }, 10000);
     }
 
-    return (
+    return (<>
+
+{
+                  loading &&  <Backdrop
+                        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                        open
+                    >
+                        <CircularProgress color="inherit" />
+                    </Backdrop>
+                }
+
 
         <div className="box">
 
@@ -128,6 +148,17 @@ function Otpp() {
             </div>
 
         </div>
+
+        <ToastContainer
+        theme="colored"
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={true}
+                newestOnTop={false}
+                pauseOnHover={false}
+                closeOnClick />
+
+        </>
     );
 
 }
