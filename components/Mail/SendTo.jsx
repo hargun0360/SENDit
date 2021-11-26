@@ -38,7 +38,7 @@ useEffect(() => {
 
     // console.log(groups);
 
-    const selectGroup = (e) => {
+    const selectGroup = async (e) => {
 
         let groupName = e.target.value;
         // console.log(groupName);
@@ -59,7 +59,7 @@ useEffect(() => {
             }
         }
         
-        axios(config).then((res) => {
+       await axios(config).then((res) => {
             setArr(res.data);
         });
 

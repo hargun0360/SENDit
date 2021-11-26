@@ -53,16 +53,19 @@ function Sign() {
 
                 console.log(res.data.token);
                 localStorage.setItem('tokendata', res.data.token);
-                history.push("/");
+                
                 if (res.data === "Invalid credentials") {
                     setLoading(false);
                     toast.warn("Invalid credentials");
                     // history.push("/SignIn");
                 }
-                if (res.data === "You don't have any account please signUp first") {
+                else if (res.data === "You don't have any account please signUp first") {
                     setLoading(false);
                     toast.error("You don't have any account please signUp first");
                     // history.push("/SignIn");
+                }
+                else{
+                        history.push("/");
                 }
 
             }).catch(() => {

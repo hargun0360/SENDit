@@ -25,7 +25,7 @@ function Otpp() {
     const [loading, setLoading] = useState(false)
 
 
-    const submitForm = (event) => {
+    const submitForm = async (event) => {
         event.preventDefault();
         setLoading(true);
         const newEntry = { ...user}
@@ -46,7 +46,7 @@ function Otpp() {
             },
             data : JSON.stringify(object)
         }
-        axios(config).then((res) => {
+      await  axios(config).then((res) => {
             console.log(res);
             if(res.data === "Changed the password successfully"){
                 setLoading(false);
@@ -65,7 +65,7 @@ function Otpp() {
         })
         setUser({ ...user, otp: "" });
     }
-    const handleClick = ()=>{
+    const handleClick =async ()=>{
         let again ={
             name: "ABCD",
             mailAddress : history.location.state.email,
@@ -83,7 +83,7 @@ function Otpp() {
             data : JSON.stringify(again)
 
         }
-        axios(configuration).then((res) => {
+      await  axios(configuration).then((res) => {
             console.log(res);
             setLoading(false);
              toast.success("otp sent successfully");

@@ -10,7 +10,7 @@ function ManageHome(){
     
     return(<>
     
-    <div id="main-Page">
+    <div id="main-Page1">
                 <Homenav />
                 <div className="name1">
                     <h1>Manage Groups</h1>

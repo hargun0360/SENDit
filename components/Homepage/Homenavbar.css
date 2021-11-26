@@ -96,3 +96,10 @@ li {
     }
 
 }
+@media (max-width:350px){
+
+    .text{
+        font-size: 12px;
+    }
+
+}

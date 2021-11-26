@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { obj } from './csv'
+
 import { BaseUrl } from '../../api/Baseurl'
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -26,10 +26,10 @@ function Group() {
 
     const handleInputs = (e) => {
         setText(e.target.value);
-        toast.success('Added the Group successfully');
+        
     }
 
-    const Submit = () => {
+    const Submit =  () => {
         const file = csvFile;
         const reader = new FileReader();
         reader.onload = function (e) {

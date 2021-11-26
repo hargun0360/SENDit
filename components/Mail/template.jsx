@@ -5,7 +5,7 @@ import { BaseUrl } from '../../api/Baseurl'
 import { useHistory } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import sending from '../../Images/sending.gif'
 import './Mailtemp.css'
 
 function Mailtemp() {
@@ -15,25 +15,26 @@ function Mailtemp() {
     let bearer = 'Bearer ' + localStorage.getItem('tokendata');
 
 
-    const [mailFrom, setMailFrom] = useState('')
+    
     const [name, setName] = useState('')
     const [tagline, setTagline] = useState('')
     const [subject, setSubject] = useState('')
     const [headline, setHeadline] = useState('')
     const [description, setDescription] = useState('')
     const [loading, setLoading] = useState(false)
+    const [loader, setLoader] = useState(false)
+    const regexName = /^[A-Za-z. ]{3,30}$/;
     // const [attachment, setAttachment] = useState('')
 
     const handleRequest = async (e) => {
-        if (mailFrom && subject && name && tagline && headline !== "") {
+        if ( subject && name && tagline && headline !== "") {
             if (description !== "") {
                 e.preventDefault()
                 setLoading(true)
-
+                setLoader(true);
                 const body = {
                     name,
                     to: history.location.state.mailTo,
-                    from: mailFrom,
                     subject,
                     description,
                     headline,
@@ -48,16 +49,16 @@ function Mailtemp() {
                         Authorization: bearer
                     }
                 }).then((res) => {
+                    setLoader(false);
                     toast.success('Email Sent Successfully')
-                    setMailFrom("");
                     setName("");
                     setSubject("");
                     setTagline("");
                     setHeadline("");
                     setDescription("");
                     setLoading(false)
-                    console.log(res)
-                }).catch((err) => {
+                }).catch(() => {
+                    setLoader(false);
                     toast.error("Failed! Email Not Sent")
                     setLoading(false)
                 })
@@ -75,6 +76,20 @@ function Mailtemp() {
 
     return (
         <>
+
+{
+      loader && <img src={sending}
+      alt = "loading..."
+            style = {{
+              filter: "invert(1)",
+              position: "absolute",
+              width : 200,
+              height : 200,
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)"
+            }} />
+    }
             <Homenav />
 
             <div className="Mail-box1">
@@ -101,11 +116,11 @@ function Mailtemp() {
                                     <input style={{ textAlign: "center",padding:"1% 0%" }}
                                         type="email"
                                         id="mailFrom"
-                                        value={mailFrom}
-                                        required
+                                        value="mailersendit@gmail.com"
                                         size="40"
-                                        onChange={(e) => setMailFrom(e.target.value)}
-                                        placeholder="Enter Your Email" />
+                                        readOnly
+                                        disabled="disabled"
+                                         />
                                 </div>
                                 {/* <div style={{ padding: "1%", paddingLeft: "6%" }} className="Attachment">
                                     <label style={{ padding: "1%", paddingLeft: "3%" }}>Attachment</label>

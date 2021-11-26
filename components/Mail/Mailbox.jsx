@@ -11,16 +11,18 @@ import imag3 from '../../Images/temp3.png'
 import imag4 from '../../Images/temp4.png'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import sending from '../../Images/sending.gif'
 
 function Mail() {
 
   const history = useHistory();
 
 
-  const [from, setFrom] = useState('')
+
   const [message, setMessage] = useState('')
   const [subject, setSubject] = useState('')
   const [loading, setLoading] = useState(false)
+  const [loader, setLoader] = useState(false)
   const [selectedFile, setSelectedFile] = useState(null);
   // const [userError,setUserError]=useState({});
   // const [isSubmit,setIsSubmit] = useState(false);
@@ -74,14 +76,15 @@ function Mail() {
 
 
 
-        const regexMail=/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/
+        
   const handleRequest = async (e) => {
     
-    if (from && subject !== "") {
+    if ( subject !== "") {
      
       if (message !== "") {
         e.preventDefault()
         setLoading(true)
+        setLoader(true);
         // console.log({ from, message, subject })
 
         // const body = {
@@ -100,7 +103,6 @@ function Mail() {
           const newName = new Date().getTime() + selectedFile.name; 
         const formData = new FormData();
         // formData.append("name", name);
-        formData.append("mailFrom", from);
         formData.append("mailTo", history.location.state.mailTo );
         formData.append("subject", subject);
         formData.append("content", message);
@@ -119,13 +121,14 @@ function Mail() {
         }).then((res) => {
           console.log(res.data);
           toast.success('Email Sent Successfully')
+          setLoader(false);
           setLoading(false)
-          setFrom("");
         setMessage("");
         setSubject("");
           console.log(res)
         }).catch(() => {
           toast.error("Failed! Email Not Sent")
+          setLoader(false);
           setLoading(false)
         })
       } else {
@@ -145,6 +148,20 @@ function Mail() {
 
   return (
     <>
+    {
+      loader && <img src={sending}
+      alt = "loading..."
+            style = {{
+              filter: "invert(1)",
+              position: "absolute",
+              width : 200,
+              height : 200,
+              top: "65%",
+              left: "60%",
+              transform: "translate(-50%, -50%)",
+              color:"inherit"
+            }} />
+    }
       <Homenav />
       {/* <div className="mail-border"> */}
       <div className="Mail-box">
@@ -220,14 +237,14 @@ function Mail() {
                 <div className="from-sub">
                   <div className="From">
                     <label className="Mail-label1">From:</label>
+
                     <input
                       type="email"
                       className="label1"
-                      value={from}
-                      required
+                      value="mailersendit@gmail.com"
                       size="75"
-                      onChange={(e) => setFrom(e.target.value)}
-                      placeholder="Enter Your Email" />
+                      readOnly
+                      disabled="disabled" />
                   </div>
                   {/* <p className="required">{userError.from}</p> */}
 

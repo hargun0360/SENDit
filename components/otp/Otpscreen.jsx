@@ -25,7 +25,7 @@ function Otp() {
     const [loading, setLoading] = useState(false)
 
 
-    const submitForm = (event) => {
+    const submitForm = async (event) => {
         event.preventDefault();
         setLoading(true);
         const newEntry = { ...user }
@@ -46,7 +46,7 @@ function Otp() {
             },
             data: JSON.stringify(object)
         }
-        axios(config).then((res) => {
+       await axios(config).then((res) => {
             console.log(res);
             if (res.data === "You are registered successfully") {
                 setLoading(false);
@@ -66,7 +66,7 @@ function Otp() {
         setUser({ ...user, otp: "" });
     }
 
-    const handleClick = () => {
+    const handleClick = async () => {
         let again = {
             name: history.location.state.name,
             mailAddress: history.location.state.mailAddress,
@@ -87,7 +87,7 @@ function Otp() {
             data: JSON.stringify(again)
 
         }
-        axios(configuration).then((res) => {
+      await  axios(configuration).then((res) => {
             setLoading(false);
             console.log(res);
             toast.success("otp sent successfully");

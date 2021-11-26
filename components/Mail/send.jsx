@@ -57,9 +57,9 @@ function Sending(props) {
         }
 
             const Submit = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         
-        
+        toast.success("Mailaddress are added successfully");
                 
         for (let i = 0; i < users.length; i++) {
             if (users[i].isChecked === true) {
@@ -86,7 +86,7 @@ function Sending(props) {
 
 
         
-        toast.success("Mailaddress are added successfully");
+        
       
         setUsers([]);
         array=[];
@@ -99,7 +99,7 @@ function Sending(props) {
     
     
 
-    const handleFinalSub = () => {
+    const handleFinalSub = async () => {
 
       setLoading(true);
 
@@ -117,7 +117,7 @@ function Sending(props) {
           }
       }
       
-      axios(config).then((res) => {
+     await axios(config).then((res) => {
           // console.log(res.data);
           setLoading(false);
           console.log(uniq);

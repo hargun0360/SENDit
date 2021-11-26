@@ -23,7 +23,7 @@ function Forgot() {
     const [userError, setUserError] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
     const [loading, setLoading] = useState(false)
-    const submitForm = (event) => {
+    const submitForm = async (event) => {
         event.preventDefault();
         setLoading(true);
         setUserError(Validate(user));
@@ -44,7 +44,7 @@ function Forgot() {
                 },
                 data: JSON.stringify(object)
             }
-            axios(config).then((res) => {
+           await axios(config).then((res) => {
                 console.log(res);
                 if (res.data === "seems like you dont have any account") {
                     setLoading(false);
