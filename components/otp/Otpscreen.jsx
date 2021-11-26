@@ -160,3 +160,8 @@ function Otp() {
 }
 
 export default Otp;
+
+
+
+// const [user, setUser] = useState({ otp: "" })
+//     const [disable, setDisable] = useState(false);
