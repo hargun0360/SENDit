@@ -18,7 +18,7 @@ function Mail() {
   const history = useHistory();
 
 
-
+  
   const [message, setMessage] = useState('')
   const [subject, setSubject] = useState('')
   const [loading, setLoading] = useState(false)
@@ -32,6 +32,8 @@ function Mail() {
   //   message,
   //   subject
   // }
+
+  const from="random@gmail.com";
 
   let bearer = 'Bearer ' + localStorage.getItem('tokendata');
 
@@ -102,7 +104,7 @@ function Mail() {
         console.log(selectedFile.name);
           const newName = new Date().getTime() + selectedFile.name; 
         const formData = new FormData();
-        // formData.append("name", name);
+         formData.append("from", from);
         formData.append("mailTo", history.location.state.mailTo );
         formData.append("subject", subject);
         formData.append("content", message);
