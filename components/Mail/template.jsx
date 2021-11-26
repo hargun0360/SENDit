@@ -15,7 +15,7 @@ function Mailtemp() {
     let bearer = 'Bearer ' + localStorage.getItem('tokendata');
 
 
-    
+    const from="random@gmail.com";
     const [name, setName] = useState('')
     const [tagline, setTagline] = useState('')
     const [subject, setSubject] = useState('')
@@ -23,8 +23,6 @@ function Mailtemp() {
     const [description, setDescription] = useState('')
     const [loading, setLoading] = useState(false)
     const [loader, setLoader] = useState(false)
-    const regexName = /^[A-Za-z. ]{3,30}$/;
-    // const [attachment, setAttachment] = useState('')
 
     const handleRequest = async (e) => {
         if ( subject && name && tagline && headline !== "") {
@@ -35,6 +33,7 @@ function Mailtemp() {
                 const body = {
                     name,
                     to: history.location.state.mailTo,
+                    from,
                     subject,
                     description,
                     headline,
@@ -122,17 +121,7 @@ function Mailtemp() {
                                         disabled="disabled"
                                          />
                                 </div>
-                                {/* <div style={{ padding: "1%", paddingLeft: "6%" }} className="Attachment">
-                                    <label style={{ padding: "1%", paddingLeft: "3%" }}>Attachment</label>
-                                    <input style={{ textAlign: "center",padding:"1% 0%" }}
-                                        type="text"
-                                        id="attachment"
-                                        value={attachment}
-                                        size="40"
-                                        onChange={(e) => setAttachment(e.target.value)}
-                                        placeholder="Add Attachment" />
-                                </div> */}
-
+                               
                                 <div style={{ padding: "1%", paddingLeft: "6%" }} className="Subject">
                                     <label style={{ padding: "1%", paddingLeft: "8%" }}>Subject</label>
                                     <input style={{ textAlign: "center",padding:"1% 0%" }}
