@@ -9,25 +9,29 @@ import imag1 from '../../Images/temp1.png'
 import imag2 from '../../Images/temp2.png'
 import imag3 from '../../Images/temp3.png'
 import imag4 from '../../Images/temp4.png'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import sending from '../../Images/sending.gif'
 
 function Mail() {
 
   const history = useHistory();
 
 
-  const [from, setFrom] = useState('')
+
   const [message, setMessage] = useState('')
   const [subject, setSubject] = useState('')
   const [loading, setLoading] = useState(false)
+  const [loader, setLoader] = useState(false)
   const [selectedFile, setSelectedFile] = useState(null);
-  const [userError,setUserError]=useState({});
-  const [isSubmit,setIsSubmit] = useState(false);
+  // const [userError,setUserError]=useState({});
+  // const [isSubmit,setIsSubmit] = useState(false);
 
-  const user={
-    from,
-    message,
-    subject
-  }
+  // const user={
+  //   from,
+  //   message,
+  //   subject
+  // }
 
   let bearer = 'Bearer ' + localStorage.getItem('tokendata');
 
@@ -50,84 +54,92 @@ function Mail() {
   }]
 
 
-  const Validate = (values)=>{
-    const error={}
-    const regexMail=/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z0-9]$/
+//   const Validate = (values)=>{
+//     const error={}
+//     const regexMail=/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/
     
-    if(!values.from){
-        error.from="**Email Is Required!";
-    }else if(!regexMail.test(values.email)){
-        error.from="**This is not a valid Email format!";
-    }
-    if(message===""){
-      error.message="**Content is required!";
-    }
-    if(subject===""){
-      error.subject="**Subject is required!";
-    }
-    return error;
+//     if(from===""){
+//         error.from="**Email Is Required!";
+//     }else if(!regexMail.test(values.from)){
+//         error.from="**This is not a valid Email format!";
+//     }
+//     if(message===""){
+//       error.message="**Content is required!";
+//     }
+//     if(subject===""){
+//       error.subject="**Subject is required!";
+//     }
+//     return error;
 
-}
+// }
 
 
 
+
+        
   const handleRequest = async (e) => {
     
+    if ( subject !== "") {
+     
+      if (message !== "") {
         e.preventDefault()
-        setUserError(Validate(user));
         setLoading(true)
-        setIsSubmit(true);
-        if(Object.keys(userError).length===0 && isSubmit){
-
-          // console.log({ from, message, subject })
-        const formData = new FormData();
-        // formData.append("name", name);
-        formData.append("mailFrom", from);
-        formData.append("mailTo", history.location.state.mailTo );
-        formData.append("subject", subject);
-        formData.append("content", message);
-        formData.append("file", selectedFile);
-    
-
-    //     public String mailFrom;
-    // public String[] mailTo;
-    // public String subject;
-    // public String content;
-    // private MultipartFile file;
+        setLoader(true);
+        // console.log({ from, message, subject })
 
         // const body = {
         //   mailFrom: from,
         //   mailTo: history.location.state.mailTo,
         //   subject,
-        //   formData,
 
         //   content: message
         // }
         // console.log(body);
         // console.log(history.location.state.mailTo);
         // console.log(body.mailTo);
+//         const newName = new Date().getTime() + event.target.files[0].name;  
+// fd.append('file[]', event.target.files[0], newName);
+        console.log(selectedFile.name);
+          const newName = new Date().getTime() + selectedFile.name; 
+        const formData = new FormData();
+        // formData.append("name", name);
+        formData.append("mailTo", history.location.state.mailTo );
+        formData.append("subject", subject);
+        formData.append("content", message);
+        formData.append("file", selectedFile,newName);
 
         console.log(formData);
 
-        await axios.post(BaseUrl() + "api/mail", formData, {
+        await axios.post(BaseUrl() + "api/upload", formData, {
           headers: {
-         
+            // "Cache-Control": "no-cache",
             "Content-Type": "multipart/form-data",
-           
             Authorization: bearer
-            
+            // "Accept-Language": "en",
+            // "Access-Control-Allow-Origin": "*",
           }
         }).then((res) => {
-          alert('Email Sent Successfully')
+          console.log(res.data);
+          toast.success('Email Sent Successfully')
+          setLoader(false);
           setLoading(false)
+        setMessage("");
+        setSubject("");
           console.log(res)
-        }).catch((err) => {
-          console.log(err)
+        }).catch(() => {
+          toast.error("Failed! Email Not Sent")
+          setLoader(false);
           setLoading(false)
         })
+      } else {
+        toast.warn('Compose Email')
+      }
 
-        }
-        
+    
+  }else {
+    toast.warn('Please fill all required filled')
+}   
+       
 
   }
 
@@ -136,6 +148,20 @@ function Mail() {
 
   return (
     <>
+    {
+      loader && <img src={sending}
+      alt = "loading..."
+            style = {{
+              filter: "invert(1)",
+              position: "absolute",
+              width : 200,
+              height : 200,
+              top: "65%",
+              left: "60%",
+              transform: "translate(-50%, -50%)",
+              color:"inherit"
+            }} />
+    }
       <Homenav />
       {/* <div className="mail-border"> */}
       <div className="Mail-box">
@@ -211,27 +237,26 @@ function Mail() {
                 <div className="from-sub">
                   <div className="From">
                     <label className="Mail-label1">From:</label>
+
                     <input
                       type="email"
                       className="label1"
-                      value={from}
-                      required
+                      value="mailersendit@gmail.com"
                       size="75"
-                      onChange={(e) => setFrom(e.target.value)}
-                      placeholder="Enter Your Email" />
+                      readOnly
+                      disabled="disabled" />
                   </div>
-                  <p className="required">{userError.from}</p>
+                  {/* <p className="required">{userError.from}</p> */}
 
                   <div style={{ padding: "1%", paddingLeft: "6%" }} className="Attachment">
                     <label style={{ padding: "1%", paddingLeft: "3%" }}>Attachment</label>
                     <input style={{ textAlign: "center", padding: "1% 0%" }}
                       type="file"
                       name="file"
-                      value={selectedFile}
                       onChange={(e) => {
                         e.preventDefault();
-
-                        setSelectedFile(e.target.file)
+                            
+                        setSelectedFile(e.target.files[0])
 
                       } }
 
@@ -249,7 +274,7 @@ function Mail() {
                       size="75"
                       placeholder="Add Subject" />
                   </div>
-                  <p className="required">{userError.subject}</p>
+                  {/* <p className="required">{userError.subject}</p> */}
                 </div>
                 <div className="Compose-mail">
                   <label className="Mail-label">Compose Mail:</label>
@@ -262,7 +287,7 @@ function Mail() {
                     rows="10"
                     cols="90" />
                 </div>
-                <p className="required">{userError.message}</p>
+                {/* <p className="required">{userError.message}</p> */}
 
                 <button
                   style={{ padding: "1% 3%" }}
@@ -278,6 +303,16 @@ function Mail() {
         </div>
       </div>
       {/* </div> */}
+
+      <ToastContainer
+      theme="colored"
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={true}
+                newestOnTop={false}
+                pauseOnHover={false}
+                closeOnClick />
+
     </>
   );
 }

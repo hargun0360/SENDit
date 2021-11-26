@@ -2,6 +2,7 @@ import React from 'react'
 import '../Homepage/navbar.css'
 import {NavLink} from 'react-router-dom'
 import imag from './mailit1 (1).png'
+import { Link } from 'react-router-dom'
 
 const Homenav = () => {
     return (
@@ -9,17 +10,17 @@ const Homenav = () => {
             <nav className="nav-grid">
                 <div className="logo" >
                     <div className="logo-image">
-                        <img src={imag} style={{height:"100%",width:"100%"}}></img>
+                       <Link to="/"> <img src={imag} style={{height:"100%",width:"100%"}}></img></Link>
                     </div>
                     <div className="logo-title">
-                        <h3 className="title">SENDit</h3>
+                    <Link to="/" style={{color:"black",textDecoration:"none"}}> <h3 className="title">SENDit</h3></Link>
                     </div>
                 </div>
 
                 <div className="nav-icons">
                     <ul className="menu-box">
                         <li className="item">
-                            <NavLink to="/"  className="text">Templates</NavLink>
+                            <NavLink to="/"  className="text">Home</NavLink>
                         </li>
                         <li className="item">
                             <NavLink to="/Manage" activeClassName="activeLink" className="text">Manage Groups</NavLink>

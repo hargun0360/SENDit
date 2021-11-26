@@ -2,13 +2,17 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BaseUrl } from '../../api/Baseurl'
-// import {obj} from './csv'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 function GroupD() {
 
     // const [groupDelete, setgroupDelete] = useState("");
     const [text, setText] = useState("");
+    const [loading, setLoading] = useState(false)
     let bearer = 'Bearer ' + localStorage.getItem('tokendata');
 
     const handleInputs = (e) => {
@@ -16,13 +20,22 @@ function GroupD() {
     }
     return (
         <>
+
+{
+                  loading &&  <Backdrop
+                        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                        open
+                    >
+                        <CircularProgress color="inherit" />
+                    </Backdrop>
+                }
             <h3>Delete Group</h3>
             <input type="text" className="groupDelete" placeholder="Group Delete" value={text} onChange={handleInputs}></input>
             <button className="Delete-button" style={{ display: "block" }} onClick={(e) => {
                 e.preventDefault()
                 // setgroupDelete(text)
                 // console.log(groupDelete);
-                
+                setLoading(true);
                 const configuration = {
                     method: "DELETE",
                     url: BaseUrl() + "api/group/deleteGroup",
@@ -38,23 +51,37 @@ function GroupD() {
                 axios(configuration).then((res) => {
                     console.log(res.data);
                     if (res.data === "Please enter a group Name to delete") {
-                        alert("Please enter a group Name to delete");
+                        setLoading(false);
+                        toast.error("Please enter a group Name to delete");
+                        setText("")
                     }
-                        if (res.data === "Removed the group successfully") {
-                                alert("Removed the group successfully");
-                            }
-                            if (res.data === "Please choose valid group name") {
-                            alert("Please choose valid group name");
-                            
-                        }
-                    
+                    if (res.data === "Removed the group successfully") {
+                        setLoading(false);
+                        toast.success("Removed the group successfully")
+                        setText("")
+                    }
+                    if (res.data === "Please choose valid group name") {
+                        setLoading(false);
+                        toast.warn("Please choose valid group name");
+                        setText("")
+
+                    }
+
 
                 });
-                // let groupn=text;
-                // obj(groupn);
 
 
             }}>Delete Group</button>
+
+
+            <ToastContainer
+            theme="colored"
+                position="top-center"
+                autoClose={3000}
+                hideProgressBar={true}
+                newestOnTop={false}
+                pauseOnHover={false}
+                closeOnClick />
 
         </>
     );

@@ -315,3 +315,38 @@ color: #FFFEFE;
     padding: 5px;
     
  }
+ @media (max-width:400px){
+
+    .activeLink {
+
+        padding: 1px;
+        border-radius: 5px;
+    }
+
+ }
+
+ @media (max-width:1227px){
+
+    .paragraph1{
+
+        font-size: 70%;
+
+
+    }
+
+
+ }
+ @media (max-width:884px){
+
+    #main-Page{
+        width: 100%;
+        height:100vh;
+        position: relative;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url('../../Images/Homeback.png');
+    }
+
+ }
+
+ 

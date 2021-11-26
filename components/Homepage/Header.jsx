@@ -7,6 +7,7 @@ import Homenav from './navbar';
 
 
 function Header() {
+    const isAuth = localStorage.getItem('tokendata')?true:false;
     return (
         <>
             <div id="main-Page">
@@ -19,7 +20,7 @@ function Header() {
 
                 </div>
                 <div className="Linking">
-                    <Link to="/SignUp" className="Home-Link">Get Started</Link>
+                    <Link to={(isAuth)?"/Signup":"/Manage"} className="Home-Link">Get Started</Link>
                 </div>
 
                 <div className="content-home">

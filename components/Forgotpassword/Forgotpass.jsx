@@ -4,8 +4,11 @@ import Image from '../Imagecompo/Image'
 import './Forgot.css'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
-import Error from '../Error/Error'
 import {BaseUrl} from '../../api/Baseurl'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function Forgot() {
     const [user, setUser] = useState({ email: "", newpassword: "" })
@@ -19,8 +22,10 @@ function Forgot() {
     const history = useHistory();
     const [userError, setUserError] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
-    const submitForm = (event) => {
+    const [loading, setLoading] = useState(false)
+    const submitForm = async (event) => {
         event.preventDefault();
+        setLoading(true);
         setUserError(Validate(user));
         setIsSubmit(true);
         if (Object.keys(userError).length === 0 && isSubmit) {
@@ -39,22 +44,31 @@ function Forgot() {
                 },
                 data: JSON.stringify(object)
             }
-            axios(config).then((res) => {
+           await axios(config).then((res) => {
                 console.log(res);
                 if (res.data === "seems like you dont have any account") {
-                    alert("seems that you don't have any account");
-                    history.push("/SignUp");
+                    setLoading(false);
+                    toast.error("seems that you don't have any account");
+                    setTimeout(() => {
+                        history.push("/SignUp");
+                    }, 2000);
+                   
                 }
                 else if(res.data === "Otp Sent"){
-                    alert("Otp Sent");
-                    history.push({
-                        pathname: "/OTPP",
-                        state: newEntry
-                    });
+                    setLoading(false);
+                    toast.success('Otp Sent')
+                    setTimeout(() => {
+                        history.push({
+                            pathname: "/OTPP",
+                            state: newEntry
+                        });
+                    }, 2000);
+                   
                 }
 
-            }).catch((error) => {
-                <Error />
+            }).catch(() => {
+                setLoading(false);
+                toast.error("Failer! Network Error");
             })
 
             setUser({ ...user, email: "", newpassword: ""});
@@ -88,6 +102,16 @@ function Forgot() {
 
     }
     return (
+        <>
+
+{
+                  loading &&  <Backdrop
+                        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                        open
+                    >
+                        <CircularProgress color="inherit" />
+                    </Backdrop>
+                }
 
         <div className="box">
             <Navbar name="Sign Up" />
@@ -134,6 +158,17 @@ function Forgot() {
                 </div>
             </div>
         </div>
+
+        <ToastContainer
+        theme="colored"
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={true}
+                newestOnTop={false}
+                pauseOnHover={false}
+                closeOnClick />
+
+        </>
 
     );
 }

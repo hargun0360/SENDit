@@ -28,9 +28,9 @@ function Navbar(props) {
 
             <nav className="navb">
                 <ul className="navul">
-                    <li className="send">
-                        SENDit
-                    </li>
+                 <li className="send">
+                 <Link to="/" style={{color:"black",textDecoration:"none"}}> SENDit </Link>
+                    </li> 
                     <li className="navbutton">
 
                         {isname ? <Link to="/SignIn">

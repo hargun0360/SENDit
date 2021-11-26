@@ -3,10 +3,12 @@ import Navbar from '../Navbar/Navbar'
 import Image from '../Imagecompo/Image'
 import './otp.css'
 import axios from 'axios'
-import {useHistory } from 'react-router-dom'
-import Error from '../Error/Error'
-import {BaseUrl} from '../../api/Baseurl'
-
+import { useHistory } from 'react-router-dom'
+import { BaseUrl } from '../../api/Baseurl'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function Otp() {
 
@@ -19,11 +21,13 @@ function Otp() {
     }
     const [allEntry, setallEntery] = useState([]);
     const history = useHistory();
-    
+    const [loading, setLoading] = useState(false)
 
-    const submitForm = (event) => {
+
+    const submitForm = async (event) => {
         event.preventDefault();
-        const newEntry = { ...user}
+        setLoading(true);
+        const newEntry = { ...user }
         setallEntery([...allEntry, newEntry]);
 
         let object = {
@@ -41,29 +45,37 @@ function Otp() {
             },
             data : JSON.stringify(object)
         }
-        axios(config).then((res) => {
+       await axios(config).then((res) => {
             console.log(res);
-            if(res.data === "You are registered successfully"){
-                alert("You are registered Successfully");
-                history.push("/SignIn");
+            if (res.data === "You are registered successfully") {
+                setLoading(false);
+                toast.success("You are registered Successfully");
+                setTimeout(() => {
+                    history.push("/SignIn");
+                }, 2000);
             } else if (res.data === "Entered Otp is NOT valid. Please Retry!") {
-                alert("Entered Otp is NOT valid. Please Retry!");
+                setLoading(false);
+                toast.error("Entered Otp is NOT valid. Please Retry!");
             }
-            
-        }).catch((error) => {
-            <Error />
+
+        }).catch(() => {
+            setLoading(false);
+            toast.error("Failed! Network Error");
         })
         setUser({ ...user, otp: "" });
     }
-    
-    const handleClick = ()=>{
-        let again ={
+
+    const handleClick = async () => {
+        let again = {
             name: history.location.state.name,
             mailAddress : history.location.state.mailAddress,
             password : history.location.state.password
         }
 
-        console.log(again);
+        setLoading(true);
+        setDisable(true);
+
+
         const configuration = {
 
             method: "POST",
@@ -74,14 +86,24 @@ function Otp() {
             data : JSON.stringify(again)
 
         }
-        axios(configuration).then((res) => {
+      await  axios(configuration).then((res) => {
+            setLoading(false);
             console.log(res);
-            // alert("otp sent successfully");
-            
+            toast.success("otp sent successfully");
+
         })
     }
 
-    return (
+    return (<>
+
+{
+                  loading &&  <Backdrop
+                        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                        open
+                    >
+                        <CircularProgress color="inherit" />
+                    </Backdrop>
+                }
 
         <div className="box">
 
@@ -122,6 +144,17 @@ function Otp() {
             </div>
 
         </div>
+        <ToastContainer
+        theme="colored"
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={true}
+                newestOnTop={false}
+                pauseOnHover={false}
+                closeOnClick />
+
+
+        </>
     );
 
 }

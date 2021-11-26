@@ -7,18 +7,14 @@ import Forgot from './components/Forgotpassword/Forgotpass'
 import Error from './components/Error/Error'
 import Otp from './components/otp/Otpscreen'
 import Otpp from './components/otp/Helper'
-// import CSV from './components/Mail/csv'
-// import Fileread from './components/Mail/group'
-// import Dropdown from './components/Mail/SendTo'
 import Mail from './components/Mail/Mailbox'
-// import GroupD from './components/Mail/Delete'
 import Mailtemp from './components/Mail/template'
 import Homenavbar from './components/Homepage/Homenavbar'
 import Homepage from './components/Homepage/Homepage'
 import ManageHome from './components/Manage/Managehome'
 import Logout from './components/Homepage/Data'
- import PrivateRoute from '../src/components/PrivateRoutes'
- import NotFound from '../src/components/NotFound';
+import PrivateRoute from '../src/components/PrivateRoutes'
+import NotFound from '../src/components/NotFound';
  
 
 
@@ -53,7 +49,7 @@ function App(){
             <PrivateRoute exact path='/Error'>
               <Error />
             </PrivateRoute>
-            <Route exact path='/Logout'>
+            <Route exact path='/Data'>
               <Logout />
             </Route>
             

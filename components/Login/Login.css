@@ -24,18 +24,188 @@
     padding: 0% 10%;
     width: 133%;
 }
+
 @media (min-width:1400px){
+    
     .btn1{
-        padding:10px 350% ;
+        padding: 10px 113px;
+     }
+}
+@media (max-width:1200px) and (min-width:985px){
+    
+    .btn1{
+        padding: 10px 113px;
+     }
+    .qt{
+        width: max-content;
+        margin-top:1%;
+        margin-left: 47%;
+    }
+    .forgot{
+
+        width: max-content;
+        margin-top:-2%;
+        margin-left: 44%;
+        
+    }
+  
+    .container{
+        position: relative;
+        /* margin-top: 77%; */
+        padding-top: 1%;
+        left: -35%;
+    }
+    
+    .heading1{
+
+        margin-left: -6%;
+    }
+    i{
+        position: absolute;
+        padding: 4%;
+        
+    }
+    
+    
+}
+@media (max-width:984px) and (min-width:607px){
+    
+    .btn1{
+        padding: 10px 113px;
+     }
+    .qt{
+        width: max-content;
+        margin-top:-19%;
+        margin-left: -10%;
+    }
+    .forgot{
+
+        width: max-content;
+        margin-top:-2%;
+        margin-left: 10%;
+        
+    }
+  
+    .Signin{
+        position: relative;
+    margin-top: 44%;
+    padding-top: 4%;
+    left: -17%;
+    }
+    
+    .heading1{
+
+        margin-left: -6%;
+        width: max-content;
+    }
+    i{
+        position: absolute;
+        padding: 4%;
+        
+    }
+    
+    
+}
+@media (max-width:805px){
+
+    .Signin{
+        position: relative;
+    margin-top: 60%;
+    padding-top: 4%;
+    left: -17%;
+    }
+
+}
+@media (min-width:360px) and  (max-width:606px){
+
+    
+     .btn1{
+        padding: 10px 113px;
+     }
+     .qt{
+         width: max-content;
+         margin-top:-14%;
+         margin-left: 2%;
+     }
+     
+     .Signin{
+        position: relative;
+    margin-top: 60%;
+    padding-top: 4%;
+    left: -34%;
+    }
+     .heading1{
+         margin-left: -6%;
+        width: 250%;
+     }
+     i{
+        position: absolute;
+        padding: 4%;
+        
+    }
+    
+    .forgot{
+
+        width: max-content;
+        margin-top:-2%;
+        margin-left: 10%;
+        
+    }
+
+}
+@media (max-width:565px){
+
+    .Signin{
+        position: relative;
+    margin-top: 73%;
+    padding-top: 4%;
+    left: -34%;
     }
 }
-@media (max-width:1200px) and (min-width:993px){
-    .btn1 {
-        padding:10px 485% ;
+@media (max-width:448px){
+
+    .Signin{
+        position: relative;
+    margin-top: 90%;
+    padding-top: 4%;
+    left: -34%;
     }
 }
-@media (max-width:993px){
+
+@media (min-width:100px) and  (max-width:359px){
+
     .btn1{
-        padding:10px 18% ;
+        padding: 10px 113px;
+     }
+    .qt{
+        width: max-content;
+        margin-top:-19%;
+        margin-left: -10%;
     }
+    .forgot{
+
+        width: max-content;
+        margin-top:-2%;
+        margin-left: 10%;
+        
+    }
+  
+    .Signin{
+        position: relative;
+    margin-top: 105%;
+    padding-top: 4%;
+    left: -40%;
+    }
+    
+    .heading1{
+
+        margin-left: -6%;
+        width: max-content;
+    }
+    i{
+        position: absolute;
+        padding: 4%;
+        
+    }
+    
 }
