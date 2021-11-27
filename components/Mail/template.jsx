@@ -15,7 +15,7 @@ function Mailtemp() {
     let bearer = 'Bearer ' + localStorage.getItem('tokendata');
 
 
-    const from="random@gmail.com";
+    const from="mailersendit@gmail.com";
     const [name, setName] = useState('')
     const [tagline, setTagline] = useState('')
     const [subject, setSubject] = useState('')

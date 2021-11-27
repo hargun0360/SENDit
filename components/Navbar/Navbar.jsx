@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Navbar.css'
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const style = {
     color: 'white'
@@ -34,9 +35,9 @@ function Navbar(props) {
                     <li className="navbutton">
 
                         {isname ? <Link to="/SignIn">
-                            <button type="button" className="btn3" onClick={handleClick}><div style={style}>{props.name}</div></button>
+                            <button type="button" id="auth-button1" className="btn btn-light" onClick={handleClick}>{props.name}</button>
                         </Link> : <Link to="/SignUp">
-                            <button type="button" className="btn3" onClick={handleClick}><span style={style}>{props.name}</span></button>
+                            <button type="button" id="auth-button2" className="btn btn-light" onClick={handleClick}>{props.name}</button>
                         </Link>}
                     </li>
                 </ul>

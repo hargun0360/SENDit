@@ -41,12 +41,6 @@ useEffect(() => {
     const selectGroup = async (e) => {
 
         let groupName = e.target.value;
-        // console.log(groupName);
-        
-            
-        
-
-        // console.log(object);
         const config = {
             method: "GET",
             url: BaseUrl() + "api/group/giveGroupName",
@@ -62,10 +56,7 @@ useEffect(() => {
        await axios(config).then((res) => {
             setArr(res.data);
         });
-
-        
-        
-    }
+ }
 
     return (
         <>
@@ -85,7 +76,6 @@ useEffect(() => {
                     </div>
 
                 </div>
-    {/* {console.log(arr)} */}
             <Sending list={arr} />
             </div>
 

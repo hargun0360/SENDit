@@ -30,10 +30,6 @@ function App(){
             <Route path="/Forgotpassword" component={Forgot} />
             <Route path="/OTP" component={Otp} />
             <Route path="/OTPP" component={Otpp} />
-            {/* <Route  exact path="/Error" component={Error} /> */}
-            
-            
-        
             <PrivateRoute exact path='/Mail'>
               <Mail />
             </PrivateRoute>
