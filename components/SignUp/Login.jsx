@@ -85,7 +85,7 @@ function Login() {
 
     const Validate = (values) => {
         const error = {}
-        const regexMail = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z0-9]$/
+        const regexMail = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/
         const regexName = /^[A-Za-z. ]{3,30}$/;
         const regexPass = /^[a-zA-Z0-9@#!$%^_]{8,}$/;
         if (!values.Name) {

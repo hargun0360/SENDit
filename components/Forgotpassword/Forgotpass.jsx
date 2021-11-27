@@ -25,12 +25,12 @@ function Forgot() {
     const [loading, setLoading] = useState(false)
     const submitForm = async (event) => {
         event.preventDefault();
-        setLoading(true);
         setUserError(Validate(user));
         setIsSubmit(true);
         if (Object.keys(userError).length === 0 && isSubmit) {
             const newEntry = { ...user }
             setallEntery([...allEntry, newEntry]);
+            setLoading(true);
             let object = {
                 mailAddress: newEntry.email,
                 password: newEntry.newpassword

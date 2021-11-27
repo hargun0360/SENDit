@@ -309,10 +309,10 @@ color: #FFFEFE;
     
     background-color: rgb(248, 78, 11);
     border-radius: 10px;
-    transition: all 0.2s ease-out;
     color: white;
-    box-shadow: 1px 1px 3px 3px rgba(7, 2, 0, 0.287);
     padding: 5px;
+    box-shadow: 5px 10px 30px rgba(189, 198, 64, 0.411);
+	transition: all ease 0.2s;
     
  }
  @media (max-width:400px){

@@ -23,11 +23,16 @@
     bottom: 25%;
     
 }
-.btn3{
-    background-color: black;
-    border-radius: 0px;
-    border-style: none;
-   
+#auth-button1{
 
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: -7%;
+}
+#auth-button2{
+
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: -7%;
 }
 

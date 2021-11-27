@@ -1,4 +1,4 @@
 export const BaseUrl = () => {
-    const baseUrl = "https://51d2-2401-4900-b93-6dc0-2ccb-1b75-7af3-a7a8.ngrok.io/";
+    const baseUrl = "https://c6f6-2401-4900-b93-6dc0-484c-2186-5e5c-ecf1.ngrok.io/";
     return baseUrl;
 }

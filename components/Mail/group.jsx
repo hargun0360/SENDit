@@ -125,7 +125,7 @@ function Group() {
                 }}>Submit</button>
 
             </div>
-            <div className="group-file" style={{ marginTop: "15%", marginLeft: "10%" }}>
+            <div className="group-file" style={{ marginTop: "15%", marginLeft: "10%",paddingTop: "14%",paddingBottom:"15%" }}>
 
                 <input type="file" accept=".csv" id="csvFile" onChange={(e) => { setCsvFile(e.target.files[0]) }} />
                 <button className="Csv-button" disabled={disable} style={{ display: "block" }} onClick={(e) => {
@@ -143,7 +143,7 @@ function Group() {
             <ToastContainer
             theme="colored"
                 position="top-center"
-                autoClose={2000}
+                autoClose={4000}
                 hideProgressBar={true}
                 newestOnTop={false}
                 pauseOnHover={false}

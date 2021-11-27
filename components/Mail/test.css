@@ -53,8 +53,6 @@
     
     grid-row: 5/6;
     grid-column: 1/2;
-    margin-top: 8%;
-    margin-left: 12%;
 
 }
 
@@ -79,6 +77,8 @@
 }
 .group-button:hover{
     background-color: rgb(248, 46, 11);
+    color: white;
+
 }
 .Csv-button{
 
@@ -95,6 +95,8 @@
 
 .Csv-button:hover{
     background-color: rgb(248, 46, 11);   
+    color: white;
+
 }
 
 .Delete-button{
@@ -113,6 +115,47 @@
 .Delete-button:hover{
 
     background-color: rgb(248, 46, 11);  
+    color: white;
 
 }
 
+.Final-Sub{
+
+    padding: 1% 2%;
+    
+    margin-top: 12%;
+    margin-left: 18%;
+    border-color: rgba(0, 0, 0, 0.637);
+    font-weight: 500;
+    font-size: 18px;
+
+}
+.Final-Sub:hover{
+
+    background-color: rgb(248, 46, 11);  
+    color: white;
+
+}
+
+.Add-btn{
+
+    padding: 1% 3%;
+    
+    margin-top: 12%;
+    margin-left: 1%;
+    border-color: rgba(0, 0, 0, 0.637);
+    font-weight: 500;
+    font-size: 18px;
+
+}
+
+.Add-btn:hover{
+
+    background-color: rgb(248, 46, 11);
+    color: white;
+
+}
+
+.groupDelete{
+    text-align: center;
+}

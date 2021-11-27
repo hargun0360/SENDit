@@ -36,11 +36,6 @@ function Sending(props) {
           setUsers(list);
         }, [props.list]);
 
-       
-        
-
-        
-      
         const handleChange = (e) => {
           const { name, checked } = e.target;
           if (name === "allSelect") {
@@ -59,7 +54,7 @@ function Sending(props) {
             const Submit = (e) => {
         e.preventDefault()
         
-        toast.success("Mailaddress are added successfully");
+        
                 
         for (let i = 0; i < users.length; i++) {
             if (users[i].isChecked === true) {
@@ -67,34 +62,18 @@ function Sending(props) {
                 
             }
         }
-
-        // console.log(array);
         
 
         for (let j = 0;j<array.length ; j++) {
               arr[c++]=array[j];
           
       }
-      // c=arr.length;
-      // console.log(c);
-      // console.log(arr.length);
-        
-      
-      // console.log(arr);
-      // console.log(arr);
-     
-
-
-        
-        
-      
         setUsers([]);
         array=[];
 
-        
+        toast.success("Mailaddress are added successfully");
 
     }
-    // console.log(arr);
      uniq = [...new Set(arr)];
     
     
@@ -173,18 +152,18 @@ function Sending(props) {
                   <label className="form-check-label ms-2">{user.name}</label>
                 </div>
               ))}
-              <button type="submit" className="btn btn-primary">Add</button>
+              <button type="submit" className="Add-btn">Add Mails</button>
             </form>
           
                     <div className="button-final" style={{marginTop:"50%"}}>
           
-                    <button type="submit" className="btn btn-success" id="Final-btn" onClick={handleFinalSub}>Final Submission</button>
+                    <button type="submit" className="Final-Sub" id="Final-btn" onClick={handleFinalSub}>Final Submission</button>
                     </div>
 
                     <ToastContainer
                     theme="colored"
                 position="top-center"
-                autoClose={2000}
+                autoClose={4000}
                 hideProgressBar={true}
                 newestOnTop={false}
                 pauseOnHover={false}

@@ -13,10 +13,28 @@ function GroupD() {
     // const [groupDelete, setgroupDelete] = useState("");
     const [text, setText] = useState("");
     const [loading, setLoading] = useState(false)
+    // const [arr,setArr] = useState([])
     let bearer = 'Bearer ' + localStorage.getItem('tokendata');
+
+    
 
     const handleInputs = (e) => {
         setText(e.target.value);
+        // const config = {
+        //     method: "POST",
+        //     url: BaseUrl() + "api/group/deleteGroup",
+        //     headers: {
+        //         "content-Type": "application/json",
+        //         Authorization: bearer
+        //     },
+        //     data: {
+        //         groupDelete: e.target.value
+        //     }
+        // }
+        // console.log(config);
+        // axios(config).then((res) => {
+        //     setArr(res.data);
+        // })
     }
     return (
         <>
@@ -77,7 +95,7 @@ function GroupD() {
             <ToastContainer
             theme="colored"
                 position="top-center"
-                autoClose={3000}
+                autoClose={4000}
                 hideProgressBar={true}
                 newestOnTop={false}
                 pauseOnHover={false}

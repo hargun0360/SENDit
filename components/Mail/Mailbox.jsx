@@ -33,7 +33,7 @@ function Mail() {
   //   subject
   // }
 
-  const from="random@gmail.com";
+  const from="mailersendit@gmail.com";
 
   let bearer = 'Bearer ' + localStorage.getItem('tokendata');
 
@@ -104,7 +104,7 @@ function Mail() {
         console.log(selectedFile.name);
           const newName = new Date().getTime() + selectedFile.name; 
         const formData = new FormData();
-         formData.append("from", from);
+         formData.append("mailFrom", from);
         formData.append("mailTo", history.location.state.mailTo );
         formData.append("subject", subject);
         formData.append("content", message);
