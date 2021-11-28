@@ -83,9 +83,17 @@ function Sending(props) {
       setLoading(true);
 
       if(uniq.length===0){
+        
+        setTimeout(() => {
+          
+          
+          setLoading(false);
+        }, 1000);
         toast.warn("Please Choose the MailAddress");
+        
       }
       else{
+        setLoading(false);
 
         const config = {
           method: "GET",
@@ -98,7 +106,7 @@ function Sending(props) {
       
      await axios(config).then((res) => {
           // console.log(res.data);
-          setLoading(false);
+          
           console.log(uniq);
           history.push({
             pathname : "/Mail",
@@ -155,7 +163,7 @@ function Sending(props) {
               <button type="submit" className="Add-btn">Add Mails</button>
             </form>
           
-                    <div className="button-final" style={{marginTop:"50%"}}>
+                    <div className="button-final" style={{marginTop:"35%"}}>
           
                     <button type="submit" className="Final-Sub" id="Final-btn" onClick={handleFinalSub}>Final Submission</button>
                     </div>

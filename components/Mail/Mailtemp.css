@@ -142,6 +142,10 @@
             padding: 3%;
         
     }
+    textarea {
+        padding: 20px;
+        margin: 10px;
+      }
 
     #send-btn{
         margin-left: 40%;

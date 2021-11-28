@@ -11,9 +11,9 @@ function Features(){
 
             <div className="a-container">
 
-                    <Featurebox image={boximg1} title="Send Mail" content="Optionally provide a list of buttons. Tapping any button will fire the respective onPress callback and dismiss the alert. By default, the only button will be an 'OK' button" link={(isAuth)?"/Signup":"/Manage"} />
-                    <Featurebox image={boximg2} title="Use Template" content="Optionally provide a list of buttons. Tapping any button will fire the respective onPress callback and dismiss the alert. By default, the only button will be an 'OK' button" link={(isAuth)?"/Signup":"/Manage"} />
-                    <Featurebox image={boximg3} title="Premium" content="Optionally provide a list of buttons. Tapping any button will fire the respective onPress callback and dismiss the alert. By default, the only button will be an 'OK' button" link={(isAuth)?"/Signup":"/Error"} />
+                    <Featurebox image={boximg1} title="Send Mail" content="Optionally provide a list of buttons. Tapping any button will fire the respective onPress callback and dismiss the alert. By default, the only button will be an 'OK' button" link={(isAuth)?"/Manage":"/Signup"} />
+                    <Featurebox image={boximg2} title="Use Template" content="Optionally provide a list of buttons. Tapping any button will fire the respective onPress callback and dismiss the alert. By default, the only button will be an 'OK' button" link={(isAuth)?"/Manage":"/Signup"} />
+                    <Featurebox image={boximg3} title="Premium" content="Optionally provide a list of buttons. Tapping any button will fire the respective onPress callback and dismiss the alert. By default, the only button will be an 'OK' button" link={(isAuth)?"/Error":"/Signup"} />
             </div>
 
         </div>    

@@ -28,9 +28,16 @@ function Group() {
         setText(e.target.value);
         
     }
+  
+    // if(csvFile.file.length === 0){
+    //     console.log("error");
+    // }
+    
 
     const Submit =  () => {
-        const file = csvFile;
+      
+
+            const file = csvFile;
         const reader = new FileReader();
         reader.onload = function (e) {
             const text = e.target.result;
@@ -51,7 +58,7 @@ function Group() {
                 data: JSON.stringify(object)
             }
             axios(config).then((res) => {
-
+                console.log(res);
                 if (res.data === "Added the groupName successfully") {
                     setLoading(false);
                     toast.success('Added the Group successfully');
@@ -61,6 +68,10 @@ function Group() {
             console.log(object);
         }
         reader.readAsText(file);
+
+        
+        
+        
     }
 
 
@@ -128,9 +139,16 @@ function Group() {
             <div className="group-file" style={{ marginTop: "15%", marginLeft: "10%",paddingTop: "14%",paddingBottom:"15%" }}>
 
                 <input type="file" accept=".csv" id="csvFile" onChange={(e) => { setCsvFile(e.target.files[0]) }} />
-                <button className="Csv-button" disabled={disable} style={{ display: "block" }} onClick={(e) => {
+                <button className="Csv-button" id="file2" disabled={disable} style={{ display: "block" }} onClick={(e) => {
 
                     if (csvFile) {
+
+                        // if(document.getElementById('file2').value = ""){
+        //     toast.warn("Please Select The CSV file");
+        //     setTimeout(() => {
+        //         return;
+        //     }, 1000);
+        // }
                         Submit();
 
 

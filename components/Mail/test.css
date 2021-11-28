@@ -124,7 +124,7 @@
     padding: 1% 2%;
     
     margin-top: 12%;
-    margin-left: 18%;
+    margin-left: 5%;
     border-color: rgba(0, 0, 0, 0.637);
     font-weight: 500;
     font-size: 18px;
@@ -158,4 +158,8 @@
 
 .groupDelete{
     text-align: center;
+}
+
+.dropdown-mail{
+    margin-left: -15%;
 }
