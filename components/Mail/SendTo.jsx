@@ -61,7 +61,9 @@ useEffect(() => {
     return (
         <>
 
+        <div className="dropdown-mail">
 
+        
             <div className="container">
                 <div className="row">
 
@@ -78,7 +80,7 @@ useEffect(() => {
                 </div>
             <Sending list={arr} />
             </div>
-
+            </div>
         </>
 
     );

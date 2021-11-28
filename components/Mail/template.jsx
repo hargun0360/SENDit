@@ -5,8 +5,8 @@ import { BaseUrl } from '../../api/Baseurl'
 import { useHistory } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import sending from '../../Images/sending.gif'
 import './Mailtemp.css'
+
 
 function Mailtemp() {
 
@@ -22,14 +22,14 @@ function Mailtemp() {
     const [headline, setHeadline] = useState('')
     const [description, setDescription] = useState('')
     const [loading, setLoading] = useState(false)
-    const [loader, setLoader] = useState(false)
+    // const [loader, setLoader] = useState(false)
 
     const handleRequest = async (e) => {
         if ( subject && name && tagline && headline !== "") {
             if (description !== "") {
                 e.preventDefault()
                 setLoading(true)
-                setLoader(true);
+                // setLoader(true);
                 const body = {
                     name,
                     to: history.location.state.mailTo,
@@ -47,8 +47,8 @@ function Mailtemp() {
                         'Content-type': 'application/json',
                         Authorization: bearer
                     }
-                }).then((res) => {
-                    setLoader(false);
+                }).then(() => {
+                    // setLoader(false);
                     toast.success('Email Sent Successfully')
                     setName("");
                     setSubject("");
@@ -56,8 +56,9 @@ function Mailtemp() {
                     setHeadline("");
                     setDescription("");
                     setLoading(false)
+                   
                 }).catch(() => {
-                    setLoader(false);
+                    // setLoader(false);
                     toast.error("Failed! Email Not Sent")
                     setLoading(false)
                 })
@@ -76,7 +77,7 @@ function Mailtemp() {
     return (
         <>
 
-{
+{/* {
       loader && <img src={sending}
       alt = "loading..."
             style = {{
@@ -88,7 +89,7 @@ function Mailtemp() {
               left: "50%",
               transform: "translate(-50%, -50%)"
             }} />
-    }
+    } */}
             <Homenav />
 
             <div className="Mail-box1">
@@ -159,6 +160,7 @@ function Mailtemp() {
                                 <div style={{ padding: "1%", paddingLeft: "6%" }} className="description-mail">
                                     <label  className="tyu">Compose Mail</label>
                                     <textarea
+                                     
                                         className="message1"
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
@@ -188,6 +190,7 @@ function Mailtemp() {
                 newestOnTop={false}
                 pauseOnHover={false}
                 closeOnClick />
+                
         </>
     );
 }

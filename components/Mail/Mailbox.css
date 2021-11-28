@@ -4,6 +4,7 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     background-color: whitesmoke;
+    overflow-x: hidden;
 }
 
 .Box2{
@@ -75,6 +76,9 @@
     background-color: rgb(241, 239, 239);
 }
 
+.mail-footer{
+    margin-top: 15%;
+}
 
 
 
