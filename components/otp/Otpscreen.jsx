@@ -151,6 +151,7 @@ function Otp() {
                 hideProgressBar={true}
                 newestOnTop={false}
                 pauseOnHover={false}
+                pauseOnFocusLoss={false}
                 closeOnClick />
 
 
