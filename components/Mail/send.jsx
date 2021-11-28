@@ -175,6 +175,7 @@ function Sending(props) {
                 hideProgressBar={true}
                 newestOnTop={false}
                 pauseOnHover={false}
+                pauseOnFocusLoss={false}
                 closeOnClick />
             </>
 
