@@ -109,6 +109,7 @@ function Mailtemp() {
                                         onChange={(e) => setName(e.target.value)}
                                         type="text"
                                         size="40"
+                                        required
                                         placeholder="Enter Your Name" />
                                 </div>
                                 <div style={{ padding: "1%", paddingLeft: "6%" }} className="From">
@@ -143,6 +144,7 @@ function Mailtemp() {
                                         onChange={(e) => setTagline(e.target.value)}
                                         type="text"
                                         size="40"
+                                        required
                                         placeholder="Enter the tagline" />
                                 </div>
 
@@ -154,6 +156,7 @@ function Mailtemp() {
                                         onChange={(e) => setHeadline(e.target.value)}
                                         type="text"
                                         size="40"
+                                        required
                                         placeholder="Enter the headline" />
                                 </div>
 
@@ -165,6 +168,7 @@ function Mailtemp() {
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
                                         type="text"
+                                        required
                                         placeholder="Enter Content from here..."
                                         rows="10"
                                         cols="70" />

@@ -351,6 +351,7 @@ function Mail() {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     type="text"
+                    required
                     placeholder="Enter Content from here..."
                     rows="10"
                     cols="90" />
